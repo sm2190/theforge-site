@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Join The Forge: Early Access</title>
+  <meta name="description" content="The app that hates being used. Focus that locks your phone. You vs You.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+
+  <!-- Social preview (what shows when the link is pasted anywhere) -->
+  <meta property="og:title" content="The Forge, the app that hates being used">
+  <meta property="og:description" content="Focus that locks your phone. Nights it guards while you sleep. You vs You.">
+  <meta property="og:image" content="../assets/feature-graphic.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --gold:#FACC15; --bg:#0A0A0A; --ink:#F5F2EA; --muted:#9a927e; --line:#2A2A2A; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background:var(--bg); color:var(--ink); min-height:100vh;
+      font-family:'Inter',system-ui,-apple-system,sans-serif;
+      display:flex; align-items:center; justify-content:center; padding:28px 22px;
+      position:relative; overflow-x:hidden;
+    }
+    /* ambient gold glow behind everything */
+    .glow {
+      position:fixed; width:900px; height:900px; border-radius:50%; pointer-events:none;
+      background:radial-gradient(circle, rgba(250,204,21,.10) 0%, rgba(250,204,21,0) 62%);
+      top:-280px; left:50%; transform:translateX(-50%); z-index:0;
+    }
+    .wrap { position:relative; z-index:1; max-width:520px; width:100%; text-align:center; }
+
+    /* The icon ships with a pure-black backing square that reads as a visible
+       block against the page. Feather its edges to transparent so only the
+       monolith and its glow remain. */
+    .logo {
+      width:96px; height:96px; margin:0 auto 20px; display:block;
+      -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 40%, rgba(0,0,0,.55) 58%, transparent 72%);
+              mask-image: radial-gradient(circle at 50% 50%, #000 40%, rgba(0,0,0,.55) 58%, transparent 72%);
+    }
+
+    .kicker {
+      font-size:11px; font-weight:800; letter-spacing:3.5px; color:var(--gold);
+      text-transform:uppercase; margin-bottom:14px;
+    }
+    h1 {
+      font-family:'Archivo Black',system-ui,sans-serif; font-size:clamp(34px,9vw,52px);
+      line-height:1.02; letter-spacing:-1.5px; text-transform:uppercase; margin-bottom:16px;
+    }
+    h1 .gold { color:var(--gold); }
+    .lead { color:#C7C2B6; font-size:16px; line-height:1.55; margin-bottom:12px; }
+
+    .versus {
+      font-family:'Archivo Black',system-ui,sans-serif; font-size:19px; letter-spacing:2px;
+      text-transform:uppercase; color:var(--gold); margin-bottom:28px;
+    }
+
+    /* the three promises, no prices anywhere on this page */
+    .pills { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:32px; }
+    .pill {
+      border:1px solid var(--line); border-radius:100px; padding:8px 15px;
+      font-size:12.5px; font-weight:600; color:#B9B3A6;
+    }
+    .pill b { color:var(--gold); font-weight:800; }
+
+    form { display:flex; gap:10px; margin-bottom:14px; }
+    input {
+      flex:1; min-width:0; padding:16px 16px; font:inherit; font-size:15px;
+      background:#121008; border:1px solid var(--line); color:var(--ink);
+      border-radius:4px; outline:none;
+    }
+    input:focus { border-color:var(--gold); }
+    input::placeholder { color:#6f6a5f; }
+    button {
+      background:var(--gold); color:#000; border:none; border-radius:4px;
+      font:inherit; font-weight:800; font-size:14px; letter-spacing:1.5px;
+      text-transform:uppercase; padding:16px 22px; cursor:pointer; white-space:nowrap;
+    }
+    button:disabled { opacity:.6; cursor:default; }
+
+    .note { font-size:13px; color:var(--muted); min-height:20px; line-height:1.5; }
+    .note.ok  { color:var(--gold); }
+    .note.err { color:#F87171; }
+
+    .foot { margin-top:34px; font-size:12px; color:#5f5a51; line-height:1.7; }
+    .foot a { color:#8a8377; text-decoration:underline; }
+
+    @media (max-width:520px) { form { flex-direction:column; } }
+  </style>
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <img class="logo" src="../assets/app-icon.png" alt="The Forge">
+
+    <p class="kicker">The Forge opens soon</p>
+    <h1>The app that <span class="gold">hates</span> being used.</h1>
+    <p class="lead">
+      Focus that locks your phone. Nights it guards while you sleep.
+      And a word you can't quietly break, because everyone sees it.
+    </p>
+    <p class="versus">You vs You</p>
+
+    <div class="pills">
+      <span class="pill"><b>Locks</b> your phone</span>
+      <span class="pill"><b>Guards</b> your nights</span>
+      <span class="pill"><b>Counts</b> every win</span>
+    </div>
+
+    <form id="wlForm" novalidate>
+      <input type="email" id="wlEmail" placeholder="your@email.com" autocomplete="email" required aria-label="Email address">
+      <button type="submit" id="wlBtn">Claim my place</button>
+    </form>
+    <p class="note" id="wlMsg"><span id="wlCount">Early access, in the order you signed up.</span></p>
+
+    <p class="foot">
+      Early access before the public launch. No spam, just the invite.<br>
+      <a href="../" data-track="footer_see_how">See how The Forge works &rarr;</a>
+    </p>
+  </main>
+
+  <script src="../track.js" defer></script>
+  <script>
+  (function () {
+    var SB  = 'https://hlvcjroskewmoxsxwksg.supabase.co';
+    var KEY = 'sb_publishable_yirT83I5CFpR3RHWdbwweA_6UlklZPT';
+
+    var form  = document.getElementById('wlForm');
+    var msg   = document.getElementById('wlMsg');
+    var btn   = document.getElementById('wlBtn');
+    var count = document.getElementById('wlCount');
+    var input = document.getElementById('wlEmail');
+    var track = function (e, l) { if (window.forgeTrack) window.forgeTrack(e, l); };
+
+    // Real signup count, shown as momentum once it means something. There is no
+    // cap: signups stay open past 100, the number just keeps climbing.
+    fetch(SB + '/rest/v1/rpc/waitlist_count', {
+      method: 'POST',
+      headers: { apikey: KEY, 'Content-Type': 'application/json' },
+      body: '{}'
+    }).then(function (r) { return r.json(); }).then(function (n) {
+      if (typeof n === 'number' && n >= 25) {
+        count.textContent = n + ' people are already waiting.';
+      }
+    }).catch(function () {});
+
+    input.addEventListener('focus', function () { track('wl_focus', 'email'); }, { once: true });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = (input.value || '').trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        msg.className = 'note err';
+        msg.textContent = 'Enter a real email. The Forge does not accept excuses.';
+        track('wl_error', 'invalid_email');
+        return;
+      }
+      var p = new URLSearchParams(location.search);
+      btn.disabled = true; btn.textContent = 'Forging...';
+      track('wl_submit', 'join');
+
+      fetch(SB + '/rest/v1/waitlist', {
+        method: 'POST',
+        headers: {
+          apikey: KEY, Authorization: 'Bearer ' + KEY,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email,
+          source: p.get('src') || p.get('utm_source') || 'join',
+          ref_code: p.get('ref') || null
+        })
+      }).then(function (r) {
+        if (r.ok || r.status === 201) {
+          msg.className = 'note ok';
+          msg.textContent = 'You are in. Watch your inbox, invites go out in signup order.';
+          form.style.display = 'none';
+          track('wl_success', 'join');
+        } else if (r.status === 409) {
+          msg.className = 'note ok';
+          msg.textContent = 'Already on the list. Good, you don’t quit.';
+          form.style.display = 'none';
+          track('wl_duplicate', 'join');
+        } else {
+          throw new Error('status ' + r.status);
+        }
+      }).catch(function () {
+        msg.className = 'note err';
+        msg.textContent = 'Something broke. Try again in a minute.';
+        btn.disabled = false; btn.textContent = 'Claim my place';
+        track('wl_error', 'network');
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

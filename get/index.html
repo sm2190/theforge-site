@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Get The Forge</title>
+  <meta name="description" content="Download The Forge, the app that hates being used.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <style>
+    :root { --gold: #FACC15; --bg: #0A0A0A; --muted: #9CA3AF; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg); color: #fff; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif; padding: 24px;
+    }
+    .card { max-width: 420px; text-align: center; }
+    img.icon { width: 84px; height: 84px; border-radius: 20px; margin-bottom: 20px; }
+    h1 { font-size: 32px; font-weight: 900; letter-spacing: -1px; text-transform: uppercase; margin-bottom: 10px; }
+    p { color: var(--muted); font-size: 15px; line-height: 1.5; margin-bottom: 26px; }
+    .btn {
+      display: block; background: var(--gold); color: #000; text-decoration: none;
+      font-weight: 900; letter-spacing: 2px; font-size: 14px; padding: 16px 20px; margin-bottom: 12px;
+    }
+    .btn.ghost { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
+    .ref {
+      margin-top: 22px; border: 1px dashed #333; padding: 12px; font-size: 13px; color: var(--muted);
+    }
+    .ref b { color: var(--gold); letter-spacing: 2px; font-size: 16px; display: block; margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img class="icon" src="../assets/app-icon.png" alt="The Forge">
+    <h1>Get The Forge</h1>
+    <p>The app that hates being used. Discipline, made real.</p>
+
+    <!-- Store links are filled in at public launch. Until then both buttons
+         land on the site. data-store attributes are what main logic rewrites. -->
+    <a class="btn" id="androidBtn" data-store="https://play.google.com/store/apps/details?id=com.theforge.app" href="../">Get it on Google Play</a>
+    <a class="btn ghost" id="iosBtn" data-store="" href="../">Download on the App Store</a>
+
+    <div class="ref" id="refBox" hidden>
+      Your invite code, enter it during onboarding:
+      <b id="refCode"></b>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // LIVE flags: flip to true when each store listing is public.
+      var ANDROID_LIVE = false;
+      var IOS_LIVE = false;
+
+      var params = new URLSearchParams(location.search);
+      var ref = (params.get('ref') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 8);
+      if (ref) {
+        document.getElementById('refBox').hidden = false;
+        document.getElementById('refCode').textContent = ref;
+      }
+
+      var androidBtn = document.getElementById('androidBtn');
+      var iosBtn = document.getElementById('iosBtn');
+
+      if (ANDROID_LIVE) {
+        var playUrl = androidBtn.getAttribute('data-store');
+        // Play Install Referrer keeps the invite code through install.
+        if (ref) playUrl += '&referrer=' + encodeURIComponent('ref=' + ref);
+        androidBtn.href = playUrl;
+      }
+      if (IOS_LIVE && iosBtn.getAttribute('data-store')) {
+        iosBtn.href = iosBtn.getAttribute('data-store');
+      }
+
+      // Auto-forward when we can tell the platform AND that store is live.
+      var ua = navigator.userAgent || '';
+      if (ANDROID_LIVE && /Android/i.test(ua)) location.replace(androidBtn.href);
+      else if (IOS_LIVE && /iPhone|iPad|iPod/i.test(ua)) location.replace(iosBtn.href);
+    })();
+  </script>
+  <script src="../track.js" defer></script>
+</body>
+</html>
