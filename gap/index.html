@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Gap Test — The Forge</title>
+  <meta name="description" content="You need 100 hours a year to beat 95% of people. Find out, in 30 seconds, whether you are actually on pace." />
+  <meta name="theme-color" content="#0A0A0A" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="The Gap Test — are you actually on pace?" />
+  <meta property="og:description" content="100 hours a year separates the people who get there from the people who talk about it. 30 seconds to find out which one you are." />
+  <meta property="og:image" content="../assets/feature-graphic.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .tool { max-width: 720px; margin: 0 auto; padding: 64px 22px 110px; }
+    .back { display:inline-block; margin-bottom:26px; color:var(--muted); font-size:13px;
+            font-weight:700; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none; }
+    .back:hover { color: var(--gold); }
+    .kicker { font-size:11px; font-weight:800; letter-spacing:3.5px; text-transform:uppercase; color:var(--gold); }
+    .tool h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(36px,8vw,60px);
+               line-height:1.02; letter-spacing:-1.5px; text-transform:uppercase; margin:14px 0 16px; }
+    .lede { color:var(--muted); font-size:17px; line-height:1.7; max-width:60ch; }
+    .lede b { color:#fff; }
+
+    .card { border:1px solid var(--line-2); background:var(--panel); padding:26px 24px; margin-top:30px; }
+    .fld { display:flex; flex-direction:column; gap:9px; margin-bottom:22px; }
+    .fld label { font-size:11px; font-weight:900; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); }
+    .fld .hint { font-size:13px; color:var(--faint); line-height:1.5; }
+    .fld input[type=text], .fld input[type=number], .fld input[type=email] {
+      background:var(--bg); border:2px solid var(--line-2); color:#fff;
+      font-family:'Inter',sans-serif; font-size:16px; font-weight:600; padding:13px 14px; width:100%;
+    }
+    .fld input:focus { outline:none; border-color:var(--gold); }
+
+    .pair { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    @media (max-width:520px){ .pair { grid-template-columns:1fr; } }
+
+    .btn { width:100%; background:var(--gold); color:#000; border:none; cursor:pointer;
+           font-family:'Inter',sans-serif; font-size:14px; font-weight:900; letter-spacing:2.5px;
+           text-transform:uppercase; padding:17px; }
+    .btn:hover { background:var(--gold-deep); }
+    .btn:focus-visible { outline:3px solid #fff; outline-offset:2px; }
+
+    /* ── Result ─────────────────────────────────────────────── */
+    #result { display:none; margin-top:30px; }
+    #result.show { display:block; }
+    .verdict { border:3px solid var(--gold); background:var(--panel); padding:28px 24px; }
+    .verdict.bad { border-color:#E24B4A; }
+    .verdict.good { border-color:#97C459; }
+    .vlabel { font-size:11px; font-weight:900; letter-spacing:3px; text-transform:uppercase; color:var(--gold); }
+    .verdict.bad .vlabel { color:#E24B4A; }
+    .verdict.good .vlabel { color:#97C459; }
+    .vbig { font-family:'Anton',sans-serif; font-size:clamp(48px,13vw,86px); line-height:1;
+            letter-spacing:-2px; margin:12px 0 4px; font-variant-numeric:tabular-nums; }
+    .vsub { font-size:15px; color:#D1D5DB; line-height:1.6; }
+    .vsub b { color:#fff; }
+
+    .bar { height:22px; background:rgba(255,255,255,0.09); margin:22px 0 8px; position:relative; overflow:hidden; }
+    .bar .fill { height:100%; background:var(--gold); width:0; transition:width .9s cubic-bezier(.2,.8,.2,1); }
+    .verdict.bad .bar .fill { background:#E24B4A; }
+    .verdict.good .bar .fill { background:#97C459; }
+    .barlbl { display:flex; justify-content:space-between; font-size:10px; font-weight:800;
+              letter-spacing:2px; text-transform:uppercase; color:var(--faint); }
+
+    .rows { margin-top:24px; border:1px solid var(--line); }
+    .row { display:flex; justify-content:space-between; gap:14px; padding:12px 16px;
+           border-bottom:1px solid var(--line); font-size:14px; }
+    .row:last-child { border-bottom:none; }
+    .row .k { color:var(--muted); }
+    .row .v { color:#fff; font-weight:700; font-variant-numeric:tabular-nums; text-align:right; }
+
+    .verdictline { margin-top:24px; padding:18px 20px; background:var(--panel-2); border-left:3px solid var(--gold); }
+    .verdict.bad .verdictline { border-left-color:#E24B4A; }
+    .verdict.good .verdictline { border-left-color:#97C459; }
+    .verdictline p { font-size:15px; color:#fff; line-height:1.65; }
+
+    .cta { margin-top:26px; border:1px solid var(--line-2); background:var(--panel); padding:24px; }
+    .cta h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:26px; letter-spacing:-0.5px;
+              text-transform:uppercase; margin-bottom:8px; }
+    .cta p { font-size:15px; color:#D1D5DB; line-height:1.6; margin-bottom:18px; }
+    .wl-note { font-size:13px; font-weight:700; margin-top:12px; }
+    .wl-note.ok { color:#97C459; }
+    .wl-note.err { color:#E24B4A; }
+    .fineprint { font-size:12px; color:var(--faint); margin-top:14px; line-height:1.5; }
+  </style>
+</head>
+<body>
+  <main class="tool">
+    <a class="back" href="../">&larr; The Forge</a>
+    <p class="kicker">The Gap Test</p>
+    <h1>Are you<br>actually on pace?</h1>
+    <p class="lede">
+      Spend <b>100 hours a year</b> on one thing and you will be better at it than
+      almost everyone around you. That is roughly <b>2 hours a week</b>. Most people
+      believe they are close. Almost nobody is. Thirty seconds to find out.
+    </p>
+
+    <form class="card" id="gapForm" novalidate>
+      <div class="fld">
+        <label for="goal">What are you chasing this year?</label>
+        <input type="text" id="goal" maxlength="90" placeholder="Memorise Juz Amma / Get to 80kg lean / Ship my app" autocomplete="off" />
+      </div>
+
+      <div class="pair">
+        <div class="fld">
+          <label for="mins">Minutes per session</label>
+          <input type="number" id="mins" min="1" max="600" step="5" placeholder="20" inputmode="numeric" />
+          <span class="hint">A realistic session, not your best day.</span>
+        </div>
+        <div class="fld">
+          <label for="days">Sessions per week</label>
+          <input type="number" id="days" min="0" max="21" step="1" placeholder="3" inputmode="numeric" />
+          <span class="hint">Be honest. Count last week, not the week you planned.</span>
+        </div>
+      </div>
+
+      <button class="btn" type="submit" data-track="gap_calc">Show me the gap</button>
+    </form>
+
+    <div id="result">
+      <div class="verdict" id="verdict">
+        <p class="vlabel" id="vlabel">Your pace</p>
+        <div class="vbig" id="vbig">0</div>
+        <p class="vsub" id="vsub"></p>
+
+        <div class="bar"><div class="fill" id="fill"></div></div>
+        <div class="barlbl"><span>0 hrs</span><span>100 hrs — the standard</span></div>
+
+        <div class="rows">
+          <div class="row"><span class="k">Your weekly total</span><span class="v" id="rWeek">—</span></div>
+          <div class="row"><span class="k">Over a year</span><span class="v" id="rYear">—</span></div>
+          <div class="row"><span class="k">The standard</span><span class="v">100 hrs / year</span></div>
+          <div class="row"><span class="k">Short by</span><span class="v" id="rShort">—</span></div>
+          <div class="row"><span class="k" id="rFixK">To close it</span><span class="v" id="rFix">—</span></div>
+        </div>
+
+        <div class="verdictline"><p id="vline"></p></div>
+      </div>
+
+      <div class="cta">
+        <h3>Knowing the number changes nothing</h3>
+        <p>
+          You already knew you were behind. The gap is not an information problem —
+          it is that nothing forces the session to happen on the days you do not
+          feel like it. That is the part The Forge does.
+        </p>
+        <form id="wlForm">
+          <div class="fld">
+            <label for="wlEmail">Get in early</label>
+            <input type="email" id="wlEmail" placeholder="you@email.com" autocomplete="email" />
+          </div>
+          <button class="btn" type="submit" data-track="gap_waitlist">Claim my place</button>
+        </form>
+        <p class="wl-note" id="wlMsg"></p>
+        <p class="fineprint">Free 14-day trial when it opens. No card. Invites go out in signup order.</p>
+      </div>
+    </div>
+  </main>
+
+  <script src="../track.js" defer></script>
+  <script>
+  (function () {
+    'use strict';
+    var SB_URL = 'https://hlvcjroskewmoxsxwksg.supabase.co';
+    var SB_KEY = 'sb_publishable_yirT83I5CFpR3RHWdbwweA_6UlklZPT';
+    var STANDARD = 100; // hours per year
+
+    function n(id) { return document.getElementById(id); }
+    function hrs(v) { return (Math.round(v * 10) / 10).toLocaleString(); }
+    // "1 hrs" reads as a bug to the user even though the number is right.
+    function unit(v) { return Math.abs(Math.round(v * 10) / 10 - 1) < 1e-9 ? ' hr' : ' hrs'; }
+
+    n('gapForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var goal = (n('goal').value || '').trim() || 'this';
+      var mins = parseFloat(n('mins').value) || 0;
+      var days = parseFloat(n('days').value) || 0;
+
+      var weekHrs = (mins * days) / 60;
+      var yearHrs = weekHrs * 52;
+      var pct     = Math.min(999, (yearHrs / STANDARD) * 100);
+      var short   = Math.max(0, STANDARD - yearHrs);
+      // What a realistic week needs to look like to hit the standard.
+      var needWeek = STANDARD / 52;                       // ~1.92 hrs/week
+      var needMins = days > 0 ? (needWeek * 60) / days : 0;
+
+      var v = n('verdict');
+      v.className = 'verdict' + (pct >= 100 ? ' good' : ' bad');
+
+      n('vbig').textContent = Math.round(pct) + '%';
+      n('vlabel').textContent = pct >= 100 ? 'You are on pace' : 'You are behind';
+      n('vsub').innerHTML = pct >= 100
+        ? 'You will clear <b>' + hrs(yearHrs) + unit(yearHrs) + '</b> this year on <b>' + goal + '</b>. That is above the standard. Protect it.'
+        : 'At this rate you will reach <b>' + hrs(yearHrs) + ' of the 100 hours</b> on <b>' + goal + '</b>.';
+
+      n('rWeek').textContent  = hrs(weekHrs) + unit(weekHrs);
+      n('rYear').textContent  = hrs(yearHrs) + unit(yearHrs);
+      n('rShort').textContent = short > 0 ? hrs(short) + unit(short) : 'nothing';
+      // Nothing to close once they are past the standard - showing a number
+      // there reads as "you still owe this", which is the wrong message.
+      n('rFixK').textContent  = pct >= 100 ? 'Pace needed' : 'To close it';
+      n('rFix').textContent   = pct >= 100
+        ? 'already clear'
+        : (days > 0 ? Math.ceil(needMins) + ' min x ' + days + '/wk'
+                    : 'start with 1 session');
+
+      var line;
+      if (days === 0 || weekHrs === 0) {
+        line = 'Zero sessions is zero hours. Not a slow pace — no pace. The first session is the only one that matters right now.';
+      } else if (pct < 35) {
+        line = 'At this rate ' + goal + ' does not happen this year, or next. The fix is not more minutes per session — it is more sessions. ' + Math.ceil(needMins) + ' minutes, ' + days + ' times a week, gets you there.';
+      } else if (pct < 100) {
+        line = 'Closer than most people, and still short. You are ' + hrs(short) + unit(short) + ' down. Add one more session a week and you clear it with room to spare.';
+      } else {
+        line = 'You are past the standard. The risk now is not intensity — it is the week you skip and never restart.';
+      }
+      n('vline').textContent = line;
+
+      n('result').classList.add('show');
+      setTimeout(function () { n('fill').style.width = Math.min(100, pct) + '%'; }, 60);
+      n('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      if (window.forgeTrack) window.forgeTrack('gap_result', String(Math.round(pct)));
+    });
+
+    n('wlForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var msg = n('wlMsg');
+      var email = (n('wlEmail').value || '').trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        msg.className = 'wl-note err';
+        msg.textContent = 'Enter a real email. The Forge does not accept excuses.';
+        return;
+      }
+      var params = new URLSearchParams(location.search);
+      var btn = e.target.querySelector('button');
+      btn.disabled = true; btn.textContent = 'Forging…';
+      fetch(SB_URL + '/rest/v1/waitlist', {
+        method: 'POST',
+        headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          source: params.get('src') || params.get('utm_source') || 'gap',
+          ref_code: params.get('ref') || null
+        })
+      }).then(function (r) {
+        if (r.ok || r.status === 201) {
+          msg.className = 'wl-note ok';
+          msg.textContent = 'You are in. Watch your inbox — invites go out in signup order.';
+          e.target.style.display = 'none';
+        } else if (r.status === 409) {
+          msg.className = 'wl-note ok';
+          msg.textContent = 'Already on the list. Good, you don’t quit.';
+          e.target.style.display = 'none';
+        } else { throw new Error('bad status ' + r.status); }
+      }).catch(function () {
+        msg.className = 'wl-note err';
+        msg.textContent = 'Something broke. Try again in a minute.';
+        btn.disabled = false; btn.textContent = 'Claim my place';
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Write Your Creed — The Forge</title>
+  <meta name="description" content="Ten minutes to define what you are actually chasing, why, and what staying the same costs you. Free, no account." />
+  <meta name="theme-color" content="#0A0A0A" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Write the Creed you'll actually keep" />
+  <meta property="og:description" content="How to define what you're chasing in 10 minutes. Free, no account." />
+  <meta property="og:image" content="../assets/feature-graphic.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .tool { max-width: 760px; margin: 0 auto; padding: 64px 22px 110px; }
+    .back { display:inline-block; margin-bottom:26px; color:var(--muted); font-size:13px;
+            font-weight:700; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none; }
+    .back:hover { color: var(--gold); }
+    .kicker { font-size:11px; font-weight:800; letter-spacing:3.5px; text-transform:uppercase; color:var(--gold); }
+    .tool h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(36px,8vw,60px);
+               line-height:1.02; letter-spacing:-1.5px; text-transform:uppercase; margin:14px 0 16px; }
+    .lede { color:var(--muted); font-size:17px; line-height:1.7; max-width:62ch; }
+    .lede b { color:#fff; }
+
+    /* ── Template picker ────────────────────────────────────── */
+    .picker { margin-top:32px; }
+    .plabel { font-size:11px; font-weight:900; letter-spacing:2.5px; text-transform:uppercase;
+              color:var(--gold); margin-bottom:12px; }
+    .chips { display:flex; flex-wrap:wrap; gap:9px; }
+    .chip { background:var(--panel); border:2px solid var(--line-2); color:#D1D5DB; cursor:pointer;
+            font-family:'Inter',sans-serif; font-size:12px; font-weight:800; letter-spacing:1.5px;
+            text-transform:uppercase; padding:11px 15px; }
+    .chip:hover { border-color:var(--gold); color:#fff; }
+    .chip.on { background:var(--gold); border-color:var(--gold); color:#000; }
+    .chip:focus-visible { outline:3px solid #fff; outline-offset:2px; }
+
+    /* ── Steps ──────────────────────────────────────────────── */
+    .step { border:1px solid var(--line-2); background:var(--panel); padding:26px 24px; margin-top:20px; }
+    .snum { font-family:'Anton',sans-serif; font-size:13px; letter-spacing:2px; color:var(--gold); }
+    .step h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:26px; letter-spacing:-0.5px;
+               text-transform:uppercase; margin:6px 0 6px; }
+    .step .why { font-size:14px; color:var(--faint); line-height:1.6; margin-bottom:18px; max-width:60ch; }
+
+    .fld { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+    .fld label { font-size:10px; font-weight:900; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); }
+    input[type=text], input[type=email], textarea {
+      background:var(--bg); border:2px solid var(--line-2); color:#fff; width:100%;
+      font-family:'Inter',sans-serif; font-size:15px; font-weight:600; padding:12px 13px;
+      line-height:1.5; resize:vertical;
+    }
+    input:focus, textarea:focus { outline:none; border-color:var(--gold); }
+    textarea { min-height:74px; }
+    textarea.tall { min-height:150px; }
+
+    .btn { background:var(--gold); color:#000; border:none; cursor:pointer; width:100%;
+           font-family:'Inter',sans-serif; font-size:14px; font-weight:900; letter-spacing:2.5px;
+           text-transform:uppercase; padding:17px; }
+    .btn:hover { background:var(--gold-deep); }
+    .btn:focus-visible { outline:3px solid #fff; outline-offset:2px; }
+    .btn.ghost { background:transparent; border:2px solid var(--line-2); color:#fff; }
+    .btn.ghost:hover { border-color:var(--gold); color:var(--gold); background:transparent; }
+    .btnrow { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px; }
+    @media (max-width:520px){ .btnrow { grid-template-columns:1fr; } }
+
+    .copybox { border:2px dashed var(--gold); background:rgba(250,204,21,0.05); padding:16px;
+               margin-bottom:16px; }
+    .copybox pre { font-family:'Inter',sans-serif; font-size:13px; color:#D1D5DB; line-height:1.7;
+                   white-space:pre-wrap; }
+    .copybox .lbl { font-size:10px; font-weight:900; letter-spacing:2.5px; text-transform:uppercase;
+                    color:var(--gold); margin-bottom:10px; }
+
+    /* ── Output ─────────────────────────────────────────────── */
+    #out { display:none; margin-top:34px; }
+    #out.show { display:block; }
+    #canvasWrap { border:1px solid var(--line-2); background:var(--panel); padding:14px; overflow-x:auto; }
+    #creedCanvas { width:100%; max-width:520px; height:auto; display:block; margin:0 auto; }
+
+    .cta { margin-top:22px; border:1px solid var(--line-2); background:var(--panel); padding:24px; }
+    .cta h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:26px; letter-spacing:-0.5px;
+              text-transform:uppercase; margin-bottom:8px; }
+    .cta p { font-size:15px; color:#D1D5DB; line-height:1.6; margin-bottom:18px; }
+    .wl-note { font-size:13px; font-weight:700; margin-top:12px; }
+    .wl-note.ok { color:#97C459; }
+    .wl-note.err { color:#E24B4A; }
+    .fineprint { font-size:12px; color:var(--faint); margin-top:14px; line-height:1.5; }
+    @media print { .back,.picker,.step,.cta,.btnrow { display:none !important; } }
+  </style>
+</head>
+<body>
+  <main class="tool">
+    <a class="back" href="../">&larr; The Forge</a>
+    <p class="kicker">Write Your Creed</p>
+    <h1>You don't have a<br>discipline problem</h1>
+    <p class="lede">
+      You have an undefined target. <b>Ten minutes</b> to write down what you are
+      chasing, why it matters, and what staying the same costs you. Free, no
+      account, nothing to install. This is the exact first step inside The Forge —
+      you can do it here on your own.
+    </p>
+
+    <div class="picker">
+      <p class="plabel">Start from a template, or blank</p>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <!-- ── 1 — The target ─────────────────────────────────── -->
+    <section class="step">
+      <p class="snum">STEP 1 OF 4</p>
+      <h2>The target</h2>
+      <p class="why">Three horizons. The year gives direction, the month gives shape, the week gives something you can actually start on Monday.</p>
+      <div class="fld"><label for="yearGoal">This year I will</label><textarea id="yearGoal" maxlength="300"></textarea></div>
+      <div class="fld"><label for="monthGoal">This month I will</label><textarea id="monthGoal" maxlength="300"></textarea></div>
+      <div class="fld"><label for="weekGoal">This week I will</label><textarea id="weekGoal" maxlength="300"></textarea></div>
+    </section>
+
+    <!-- ── 2 — The why ────────────────────────────────────── -->
+    <section class="step">
+      <p class="snum">STEP 2 OF 4</p>
+      <h2>The why</h2>
+      <p class="why">Goals fail on the days you don't feel like it. What carries you through those days is not the goal — it's the reason underneath it. Ask "why?" five times and stop at the answer that stings.</p>
+      <div class="copybox">
+        <p class="lbl">The five whys — worked example</p>
+        <pre>I want to bulk to 85kg of lean muscle.
+&rarr; Why? Because I'm tired of feeling weak and overlooked.
+&rarr; Why? Because I've shrunk from things I wanted my whole life.
+&rarr; Why? Because deep down I don't believe I can change.
+&rarr; Why? Because every time it got hard, I quit.
+&rarr; Why? Because if I don't prove myself wrong now, I never will.</pre>
+      </div>
+      <div class="fld"><label for="whyText">Your five whys</label><textarea id="whyText" class="tall" maxlength="5000"></textarea></div>
+    </section>
+
+    <!-- ── 3 — Pain & pleasure ────────────────────────────── -->
+    <section class="step">
+      <p class="snum">STEP 3 OF 4</p>
+      <h2>The cost, and the prize</h2>
+      <p class="why">Write down what staying exactly as you are will cost you, and what it looks like when you get there. Both, specifically. Vague costs do not move anyone.</p>
+      <div class="fld"><label for="pain">What staying the same costs me</label><textarea id="pain" class="tall" maxlength="2000"></textarea></div>
+      <div class="fld"><label for="pleasure">What it looks like when I get there</label><textarea id="pleasure" class="tall" maxlength="2000"></textarea></div>
+    </section>
+
+    <!-- ── 4 — Daily ──────────────────────────────────────── -->
+    <section class="step">
+      <p class="snum">STEP 4 OF 4</p>
+      <h2>Today, and the stakes</h2>
+      <p class="why">One to three things today that move the week forward. Then the reward if you finish, and the price if you don't. Stakes you'll actually honour.</p>
+      <div class="fld"><label for="daily">Today's non-negotiables</label><textarea id="daily" maxlength="600"></textarea></div>
+      <div class="fld"><label for="reward">If all done</label><input type="text" id="reward" maxlength="200" /></div>
+      <div class="fld"><label for="punish">If any missed</label><input type="text" id="punish" maxlength="200" /></div>
+      <button class="btn" id="buildBtn" type="button" data-track="creed_build">Seal my Creed</button>
+    </section>
+
+    <!-- ── Output ─────────────────────────────────────────── -->
+    <div id="out">
+      <div id="canvasWrap"><canvas id="creedCanvas" width="1080" height="1350"></canvas></div>
+      <div class="btnrow">
+        <button class="btn" id="dlBtn" type="button" data-track="creed_download">Download image</button>
+        <button class="btn ghost" id="printBtn" type="button" data-track="creed_print">Print / save PDF</button>
+      </div>
+
+      <div class="cta">
+        <h3>Now comes the hard part</h3>
+        <p>
+          Your Creed is written. Nothing about writing it makes you do it on the
+          Tuesday you're tired. That's the part The Forge handles — it locks your
+          phone during focus, shuts the day down at night, and puts three people
+          on your streak who see every miss.
+        </p>
+        <form id="wlForm">
+          <div class="fld">
+            <label for="wlEmail">Get in early</label>
+            <input type="email" id="wlEmail" placeholder="you@email.com" autocomplete="email" />
+          </div>
+          <button class="btn" type="submit" data-track="creed_waitlist">Claim my place</button>
+        </form>
+        <p class="wl-note" id="wlMsg"></p>
+        <p class="fineprint">Free 14-day trial when it opens. No card. Your Creed stays in your browser — we never see it.</p>
+      </div>
+    </div>
+  </main>
+
+  <script src="../track.js" defer></script>
+  <script>
+  (function () {
+    'use strict';
+    var SB_URL = 'https://hlvcjroskewmoxsxwksg.supabase.co';
+    var SB_KEY = 'sb_publishable_yirT83I5CFpR3RHWdbwweA_6UlklZPT';
+    function n(id){ return document.getElementById(id); }
+
+    /* Templates mirror the four inside the app (settings.tsx) so the free tool
+       and the product say the same thing. */
+    var T = [
+      { name:'Sacred Track',
+        yearGoal:'Become consistent in worship and Quranic study',
+        monthGoal:'Pray every Fajr on time and read 1 juz of Quran',
+        weekGoal:'Complete morning Dhikr and daily Quran portion every day this week',
+        why:'Because my relationship with Allah is the foundation of everything else in my life. Without it, everything I build is hollow.',
+        pain:'Waking up having missed Fajr again and carrying that heaviness all day\nThe spiritual emptiness that settles in after weeks of neglect\nLooking back in 5 years and realising I never built the habit that matters most',
+        pleasure:'The clarity and peace that follow a morning of genuine worship\nThe feeling of being exactly where I am supposed to be\nBuilding a legacy my children will inherit',
+        daily:'Fajr on time\nMorning Dhikr (10 min)\nQuran (30 min)',
+        reward:'30 minutes of leisure with complete peace of mind',
+        punish:'No phone for the first 2 hours tomorrow' },
+      { name:'Academic Grind',
+        yearGoal:'Master my field and achieve academic excellence',
+        monthGoal:'Complete my study plan and score above target on next exam',
+        weekGoal:'Cover all planned material and review notes every single day',
+        why:'Because mastery is not accidental. Every hour I invest now compounds into who I become.',
+        pain:'Seeing the exam and knowing I could have prepared more\nWatching others advance while I stayed comfortable\nThe shame of potential wasted through distraction',
+        pleasure:'The confidence that comes from genuinely knowing my material\nEarning the grade that reflects real effort, not luck\nBeing the person others ask for help',
+        daily:'2 hrs deep study (no phone)\nReview yesterday\'s notes\nPractice questions (30 min)',
+        reward:'1 hour of guilt-free entertainment',
+        punish:'No social media tomorrow morning until study target is hit' },
+      { name:'Fitness Forge',
+        yearGoal:'Transform my body and make fitness a permanent part of my identity',
+        monthGoal:'Train 5 days a week and hit nutrition targets consistently',
+        weekGoal:'Complete every planned workout and track meals daily',
+        why:'Because my body is the vessel for everything else I want to do. I refuse to let weakness be my default state.',
+        pain:'Looking in the mirror and not recognising myself\nRunning out of breath doing things that should be easy\nThe slow, invisible damage of years without training',
+        pleasure:'The energy and clarity that come from a strong, trained body\nMoving through the world with confidence\nThe discipline built in the gym that bleeds into everything else',
+        daily:'Workout (45 min)\nHit protein target\nIn bed by 10:30 PM',
+        reward:'A meal I enjoy, with zero guilt',
+        punish:'Double the missed workout tomorrow, no exceptions' },
+      { name:"Builder's Path",
+        yearGoal:'Ship a product that reaches real users and generates revenue',
+        monthGoal:'Launch my MVP and get the first 10 paying customers',
+        weekGoal:'Ship at least one meaningful feature or piece of content this week',
+        why:'Because ideas die in people who wait. I build because the version of me who shipped is who I choose to become.',
+        pain:'Having an idea for years and never shipping it\nWatching others build what I imagined first\nThe creeping feeling that potential is expiring unused',
+        pleasure:'The first user who tells me what I built changed something for them\nWaking up to notifications of people using something I made\nThe compounding confidence of someone who has shipped',
+        daily:'2 hrs deep build time\nShip or publish something\nLearn one new thing',
+        reward:'1 hour of games or entertainment with zero guilt',
+        punish:'No entertainment tomorrow until build target is hit first' },
+      { name:'Blank Slate', yearGoal:'',monthGoal:'',weekGoal:'',why:'',pain:'',pleasure:'',daily:'',reward:'',punish:'' }
+    ];
+
+    /* Build the template chips */
+    var chips = n('chips');
+    T.forEach(function (t, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'chip'; b.textContent = t.name;
+      b.addEventListener('click', function () {
+        [].forEach.call(chips.children, function (c) { c.classList.remove('on'); });
+        b.classList.add('on');
+        n('yearGoal').value = t.yearGoal; n('monthGoal').value = t.monthGoal;
+        n('weekGoal').value = t.weekGoal; n('whyText').value = t.why;
+        n('pain').value = t.pain; n('pleasure').value = t.pleasure;
+        n('daily').value = t.daily; n('reward').value = t.reward; n('punish').value = t.punish;
+        if (window.forgeTrack) window.forgeTrack('creed_template', t.name);
+      });
+      chips.appendChild(b);
+    });
+
+    /* ── Canvas render: a shareable 4:5 Creed card ─────────── */
+    function wrap(ctx, text, x, y, maxW, lh, max) {
+      var out = 0;
+      String(text || '').split('\n').forEach(function (para) {
+        if (out >= max) return;
+        var words = para.split(' '), line = '';
+        for (var i = 0; i < words.length; i++) {
+          var test = line ? line + ' ' + words[i] : words[i];
+          if (ctx.measureText(test).width > maxW && line) {
+            ctx.fillText(line, x, y + out * lh); out++; line = words[i];
+            if (out >= max) return;
+          } else { line = test; }
+        }
+        if (line && out < max) { ctx.fillText(line, x, y + out * lh); out++; }
+      });
+      return out;
+    }
+
+    function render() {
+      var c = n('creedCanvas'), ctx = c.getContext('2d');
+      var W = c.width, H = c.height, P = 78;
+
+      ctx.fillStyle = '#0A0A0A'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#FACC15'; ctx.fillRect(0, 0, W, 14);
+
+      ctx.fillStyle = '#FACC15';
+      ctx.font = '700 26px Inter, sans-serif';
+      ctx.fillText('M Y   C R E E D', P, 104);
+
+      ctx.fillStyle = '#6B7280';
+      ctx.font = '600 22px Inter, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(new Date().toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'}).toUpperCase(), W - P, 104);
+      ctx.textAlign = 'left';
+
+      var y = 190;
+      function block(label, value, color, size, maxLines) {
+        if (!String(value || '').trim()) return;
+        ctx.fillStyle = '#6B7280';
+        ctx.font = '800 20px Inter, sans-serif';
+        ctx.fillText(label, P, y); y += 34;
+        ctx.fillStyle = color;
+        ctx.font = '700 ' + size + 'px Inter, sans-serif';
+        var used = wrap(ctx, value, P, y, W - P * 2, size + 12, maxLines);
+        y += used * (size + 12) + 34;
+      }
+
+      block('THIS YEAR',  n('yearGoal').value,  '#FFFFFF', 40, 3);
+      block('THIS MONTH', n('monthGoal').value, '#D1D5DB', 30, 2);
+      block('THIS WEEK',  n('weekGoal').value,  '#D1D5DB', 30, 2);
+
+      ctx.strokeStyle = 'rgba(255,255,255,0.16)'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(P, y - 12); ctx.lineTo(W - P, y - 12); ctx.stroke();
+      y += 24;
+
+      block('TODAY',      n('daily').value,    '#FACC15', 30, 4);
+      block('THE COST',   n('pain').value,     '#9CA3AF', 24, 3);
+      block('THE PRIZE',  n('pleasure').value, '#9CA3AF', 24, 3);
+
+      ctx.fillStyle = '#6B7280';
+      ctx.font = '800 20px Inter, sans-serif';
+      ctx.fillText('J O I N T H E F O R G E . A P P', P, H - 54);
+    }
+
+    n('buildBtn').addEventListener('click', function () {
+      render();
+      n('out').classList.add('show');
+      n('out').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    n('dlBtn').addEventListener('click', function () {
+      render();
+      var a = document.createElement('a');
+      a.download = 'my-creed.png';
+      a.href = n('creedCanvas').toDataURL('image/png');
+      a.click();
+    });
+
+    n('printBtn').addEventListener('click', function () { window.print(); });
+
+    n('wlForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var msg = n('wlMsg');
+      var email = (n('wlEmail').value || '').trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        msg.className = 'wl-note err';
+        msg.textContent = 'Enter a real email. The Forge does not accept excuses.';
+        return;
+      }
+      var params = new URLSearchParams(location.search);
+      var btn = e.target.querySelector('button');
+      btn.disabled = true; btn.textContent = 'Forging…';
+      fetch(SB_URL + '/rest/v1/waitlist', {
+        method: 'POST',
+        headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          source: params.get('src') || params.get('utm_source') || 'creed',
+          ref_code: params.get('ref') || null
+        })
+      }).then(function (r) {
+        if (r.ok || r.status === 201) {
+          msg.className = 'wl-note ok';
+          msg.textContent = 'You are in. Watch your inbox — invites go out in signup order.';
+          e.target.style.display = 'none';
+        } else if (r.status === 409) {
+          msg.className = 'wl-note ok';
+          msg.textContent = 'Already on the list. Good, you don’t quit.';
+          e.target.style.display = 'none';
+        } else { throw new Error('bad status ' + r.status); }
+      }).catch(function () {
+        msg.className = 'wl-note err';
+        msg.textContent = 'Something broke. Try again in a minute.';
+        btn.disabled = false; btn.textContent = 'Claim my place';
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
