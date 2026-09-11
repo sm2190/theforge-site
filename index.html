@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data:; connect-src 'self' https://hlvcjroskewmoxsxwksg.supabase.co; base-uri 'none'; form-action 'self'; object-src 'none'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Forge: Discipline, made real</title>
   <meta name="description" content="The Forge turns discipline into a system you can see. Focus that locks your phone, public accountability, and a circle of three who won't let you quit." />
@@ -211,10 +213,14 @@
         <h2 class="disp">Get in <span class="gold">first</span>.</h2>
         <p style="margin:14px 0 22px">Early access before the public launch. Invites go out in signup order, and waitlist members get first claim on the <b>Founding&nbsp;20</b>.</p>
         <form id="wlForm" class="wl-form" novalidate>
-          <input type="email" id="wlEmail" class="wl-input" placeholder="your@email.com" autocomplete="email" required />
-          <button type="submit" class="btn btn-gold" id="wlBtn">Claim my place</button>
+          <label for="wlEmail" class="sr-only">Your email address</label>
+          <input type="email" id="wlEmail" class="wl-input" placeholder="your@email.com" autocomplete="email" required aria-describedby="wlConsent" />
+          <button type="submit" class="btn btn-gold" id="wlBtn">Join the waitlist</button>
         </form>
-        <p class="wl-note" id="wlMsg"><span id="wlCount"></span></p>
+        <p class="wl-consent" id="wlConsent">We use your email for one thing: to tell you when The Forge
+        opens. No newsletter, no sharing, no selling. Unsubscribe in one click, or ask us to delete it at
+        any time. See our <a href="privacy/">Privacy Policy</a>.</p>
+        <p class="wl-note" id="wlMsg" role="status" aria-live="polite"><span id="wlCount"></span></p>
       </div>
     </section>
 
@@ -243,11 +249,11 @@
         </div>
         <div class="fcol"><h4>Free tools</h4><a href="creed/">Write your Creed</a><a href="gap/">The Gap Test</a></div>
         <div class="fcol"><h4>Product</h4><a href="#system">The System</a><a href="#accountability">Accountability</a><a href="#pricing">Pricing</a></div>
-        <div class="fcol"><h4>Company</h4><a href="#">Manifesto</a><a href="#">Contact</a><a href="#">Careers</a></div>
-        <div class="fcol"><h4>Legal</h4><a href="privacy/">Privacy</a><a href="terms/">Terms</a><a href="terms/#5-refunds">Refunds</a></div>
+        <div class="fcol"><h4>Company</h4><a href="#system">Manifesto</a><a href="mailto:theforgemaster1@proton.me">Contact</a></div>
+        <div class="fcol"><h4>Legal</h4><a href="privacy/">Privacy</a><a href="terms/">Terms</a><a href="terms/#5-refunds">Refunds</a><a href="delete-account/">Delete your account</a></div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; <span id="year">2026</span> The Forge. All rights reserved.</span>
+        <span>&copy; <span id="year">2026</span> The Forge. Published by Sharafath Mohamed Technologies, Dubai, UAE. All rights reserved.</span>
         <div class="footer-social">
           <a href="#" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
           <a href="#" aria-label="X"><i class="ti ti-brand-x"></i></a>

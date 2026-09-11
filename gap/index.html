@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data:; connect-src 'self' https://hlvcjroskewmoxsxwksg.supabase.co; base-uri 'none'; form-action 'self'; object-src 'none'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Gap Test — The Forge</title>
   <meta name="description" content="You need 100 hours a year to beat 95% of people. Find out, in 30 seconds, whether you are actually on pace." />
@@ -160,6 +162,8 @@
   </main>
 
   <script src="../track.js" defer></script>
+  <!-- motion.dev (MIT), vendored so the script-src 'self' CSP admits it. -->
+  <script src="../assets/motion.min.js"></script>
   <script>
   (function () {
     'use strict';
@@ -189,11 +193,39 @@
       var v = n('verdict');
       v.className = 'verdict' + (pct >= 100 ? ' good' : ' bad');
 
-      n('vbig').textContent = Math.round(pct) + '%';
+      // Count the verdict up rather than snapping to it. The number is the
+      // whole point of the tool, so it gets the one animation on the page.
+      // Falls back to a plain set if the library failed to load, and respects
+      // the OS reduce-motion switch.
+      var big = n('vbig');
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (window.Motion && !reduce) {
+        var from = parseInt(big.textContent, 10) || 0;
+        Motion.animate(from, Math.round(pct), {
+          duration: 1.1,
+          ease: [0.2, 0.8, 0.2, 1],
+          onUpdate: function (val) { big.textContent = Math.round(val) + '%'; }
+        });
+        Motion.animate(big, { scale: [0.92, 1] }, { duration: 0.6, ease: 'backOut' });
+      } else {
+        big.textContent = Math.round(pct) + '%';
+      }
       n('vlabel').textContent = pct >= 100 ? 'You are on pace' : 'You are behind';
-      n('vsub').innerHTML = pct >= 100
-        ? 'You will clear <b>' + hrs(yearHrs) + unit(yearHrs) + '</b> this year on <b>' + goal + '</b>. That is above the standard. Protect it.'
-        : 'At this rate you will reach <b>' + hrs(yearHrs) + ' of the 100 hours</b> on <b>' + goal + '</b>.';
+      // `goal` is free text the visitor typed, so it must never reach innerHTML.
+      // Today nothing prefills this field from the URL, which keeps it merely
+      // self-XSS. The moment a shareable "?goal=..." result link is added, and
+      // that is the obvious next feature for this tool, the same line would
+      // become reflected XSS on the main domain. Build the nodes instead.
+      var vsub = n('vsub');
+      var bold = function (t) { var e = document.createElement('b'); e.textContent = t; return e; };
+      vsub.textContent = '';
+      if (pct >= 100) {
+        vsub.append('You will clear ', bold(hrs(yearHrs) + unit(yearHrs)),
+                    ' this year on ', bold(goal), '. That is above the standard. Protect it.');
+      } else {
+        vsub.append('At this rate you will reach ', bold(hrs(yearHrs) + ' of the 100 hours'),
+                    ' on ', bold(goal), '.');
+      }
 
       n('rWeek').textContent  = hrs(weekHrs) + unit(weekHrs);
       n('rYear').textContent  = hrs(yearHrs) + unit(yearHrs);

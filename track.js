@@ -5,10 +5,14 @@
  * which sections they actually see, what they click, and where they drop out
  * of the waitlist funnel.
  *
- * Privacy: no cookies, no IP logging, no cross-site identifiers, no third
- * party. The session id is a random string held in sessionStorage, so it dies
- * when the tab closes and cannot follow anyone anywhere. Only the referrer's
- * HOST is stored, never the full URL.
+ * Privacy: no cookies, no cross-site identifiers, no third party, and nothing
+ * whatsoever written to the visitor's device. The visit id is a random string
+ * held in a local variable, so it dies with the page and cannot follow anyone
+ * anywhere. Storing nothing on the device is deliberate: it is what keeps this
+ * outside the EU/UK ePrivacy consent rules, so the site needs no cookie banner.
+ * Do not reintroduce cookies, localStorage or sessionStorage here without
+ * adding a consent gate first. Only the referrer's HOST is stored, never the
+ * full URL.
  *
  * Usage:
  *   <script src="/track.js" defer></script>
@@ -26,17 +30,10 @@
   // Respect an explicit Do Not Track signal.
   if (navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
 
-  // ── session id: random, per-tab, non-persistent ──────────────────────────
-  var sid;
-  try {
-    sid = sessionStorage.getItem('fg_sid');
-    if (!sid) {
-      sid = Math.random().toString(36).slice(2) + Date.now().toString(36);
-      sessionStorage.setItem('fg_sid', sid);
-    }
-  } catch (e) {
-    sid = 'nostore' + Date.now().toString(36);
-  }
+  // ── visit id: random, in-memory, never persisted ─────────────────────────
+  // Scoped to this page load rather than the tab. That loses the ability to
+  // stitch a journey across pages, which is the price of touching no storage.
+  var sid = Math.random().toString(36).slice(2) + Date.now().toString(36);
 
   var params = new URLSearchParams(location.search);
   var source = params.get('src') || params.get('utm_source') || null;
