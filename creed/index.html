@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data:; connect-src 'self' https://hlvcjroskewmoxsxwksg.supabase.co; base-uri 'none'; form-action 'self'; object-src 'none'" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Write Your Creed — The Forge</title>
+  <title>Write Your Creed | The Forge</title>
   <meta name="description" content="Ten minutes to define what you are actually chasing, why, and what staying the same costs you. Free, no account." />
   <meta name="theme-color" content="#0A0A0A" />
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
@@ -98,8 +98,8 @@
     <p class="lede">
       You have an undefined target. <b>Ten minutes</b> to write down what you are
       chasing, why it matters, and what staying the same costs you. Free, no
-      account, nothing to install. This is the exact first step inside The Forge —
-      you can do it here on your own.
+      account, nothing to install. This is the exact first step inside The Forge,
+      and you can do it here on your own.
     </p>
 
     <div class="picker">
@@ -107,7 +107,7 @@
       <div class="chips" id="chips"></div>
     </div>
 
-    <!-- ── 1 — The target ─────────────────────────────────── -->
+    <!-- ── 1. The target ─────────────────────────────────── -->
     <section class="step">
       <p class="snum">STEP 1 OF 4</p>
       <h2>The target</h2>
@@ -117,13 +117,13 @@
       <div class="fld"><label for="weekGoal">This week I will</label><textarea id="weekGoal" maxlength="300"></textarea></div>
     </section>
 
-    <!-- ── 2 — The why ────────────────────────────────────── -->
+    <!-- ── 2. The why ────────────────────────────────────── -->
     <section class="step">
       <p class="snum">STEP 2 OF 4</p>
       <h2>The why</h2>
-      <p class="why">Goals fail on the days you don't feel like it. What carries you through those days is not the goal — it's the reason underneath it. Ask "why?" five times and stop at the answer that stings.</p>
+      <p class="why">Goals fail on the days you don't feel like it. What carries you through those days is not the goal. It's the reason underneath it. Ask "why?" five times and stop at the answer that stings.</p>
       <div class="copybox">
-        <p class="lbl">The five whys — worked example</p>
+        <p class="lbl">The five whys: a worked example</p>
         <pre>I want to bulk to 85kg of lean muscle.
 &rarr; Why? Because I'm tired of feeling weak and overlooked.
 &rarr; Why? Because I've shrunk from things I wanted my whole life.
@@ -134,7 +134,7 @@
       <div class="fld"><label for="whyText">Your five whys</label><textarea id="whyText" class="tall" maxlength="5000"></textarea></div>
     </section>
 
-    <!-- ── 3 — Pain & pleasure ────────────────────────────── -->
+    <!-- ── 3. Pain & pleasure ────────────────────────────── -->
     <section class="step">
       <p class="snum">STEP 3 OF 4</p>
       <h2>The cost, and the prize</h2>
@@ -143,7 +143,7 @@
       <div class="fld"><label for="pleasure">What it looks like when I get there</label><textarea id="pleasure" class="tall" maxlength="2000"></textarea></div>
     </section>
 
-    <!-- ── 4 — Daily ──────────────────────────────────────── -->
+    <!-- ── 4. Daily ──────────────────────────────────────── -->
     <section class="step">
       <p class="snum">STEP 4 OF 4</p>
       <h2>Today, and the stakes</h2>
@@ -166,7 +166,7 @@
         <h3>Now comes the hard part</h3>
         <p>
           Your Creed is written. Nothing about writing it makes you do it on the
-          Tuesday you're tired. That's the part The Forge handles — it locks your
+          Tuesday you're tired. That's the part The Forge handles: it locks your
           phone during focus, shuts the day down at night, and puts three people
           on your streak who see every miss.
         </p>
@@ -178,7 +178,7 @@
           <button class="btn" type="submit" data-track="creed_waitlist">Claim my place</button>
         </form>
         <p class="wl-note" id="wlMsg"></p>
-        <p class="fineprint">Free 14-day trial when it opens. No card. Your Creed stays in your browser — we never see it.</p>
+        <p class="fineprint">Free 14-day trial when it opens. No card. Your Creed stays in your browser. We never see it.</p>
       </div>
     </div>
   </main>
@@ -357,7 +357,7 @@
       }).then(function (r) {
         if (r.ok || r.status === 201) {
           msg.className = 'wl-note ok';
-          msg.textContent = 'You are in. Watch your inbox — invites go out in signup order.';
+          msg.textContent = 'You are in. Watch your inbox: invites go out in signup order.';
           e.target.style.display = 'none';
         } else if (r.status === 409) {
           msg.className = 'wl-note ok';

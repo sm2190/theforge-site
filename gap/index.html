@@ -5,12 +5,12 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data:; connect-src 'self' https://hlvcjroskewmoxsxwksg.supabase.co; base-uri 'none'; form-action 'self'; object-src 'none'" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Gap Test — The Forge</title>
+  <title>The Gap Test | The Forge</title>
   <meta name="description" content="You need 100 hours a year to beat 95% of people. Find out, in 30 seconds, whether you are actually on pace." />
   <meta name="theme-color" content="#0A0A0A" />
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="The Gap Test — are you actually on pace?" />
+  <meta property="og:title" content="The Gap Test: are you actually on pace?" />
   <meta property="og:description" content="100 hours a year separates the people who get there from the people who talk about it. 30 seconds to find out which one you are." />
   <meta property="og:image" content="../assets/feature-graphic.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -128,14 +128,14 @@
         <p class="vsub" id="vsub"></p>
 
         <div class="bar"><div class="fill" id="fill"></div></div>
-        <div class="barlbl"><span>0 hrs</span><span>100 hrs — the standard</span></div>
+        <div class="barlbl"><span>0 hrs</span><span>100 hrs, the standard</span></div>
 
         <div class="rows">
-          <div class="row"><span class="k">Your weekly total</span><span class="v" id="rWeek">—</span></div>
-          <div class="row"><span class="k">Over a year</span><span class="v" id="rYear">—</span></div>
+          <div class="row"><span class="k">Your weekly total</span><span class="v" id="rWeek">0</span></div>
+          <div class="row"><span class="k">Over a year</span><span class="v" id="rYear">0</span></div>
           <div class="row"><span class="k">The standard</span><span class="v">100 hrs / year</span></div>
-          <div class="row"><span class="k">Short by</span><span class="v" id="rShort">—</span></div>
-          <div class="row"><span class="k" id="rFixK">To close it</span><span class="v" id="rFix">—</span></div>
+          <div class="row"><span class="k">Short by</span><span class="v" id="rShort">0</span></div>
+          <div class="row"><span class="k" id="rFixK">To close it</span><span class="v" id="rFix">0</span></div>
         </div>
 
         <div class="verdictline"><p id="vline"></p></div>
@@ -144,8 +144,8 @@
       <div class="cta">
         <h3>Knowing the number changes nothing</h3>
         <p>
-          You already knew you were behind. The gap is not an information problem —
-          it is that nothing forces the session to happen on the days you do not
+          You already knew you were behind. The gap is not an information problem.
+          It is that nothing forces the session to happen on the days you do not
           feel like it. That is the part The Forge does.
         </p>
         <form id="wlForm">
@@ -240,13 +240,13 @@
 
       var line;
       if (days === 0 || weekHrs === 0) {
-        line = 'Zero sessions is zero hours. Not a slow pace — no pace. The first session is the only one that matters right now.';
+        line = 'Zero sessions is zero hours. Not a slow pace. No pace. The first session is the only one that matters right now.';
       } else if (pct < 35) {
-        line = 'At this rate ' + goal + ' does not happen this year, or next. The fix is not more minutes per session — it is more sessions. ' + Math.ceil(needMins) + ' minutes, ' + days + ' times a week, gets you there.';
+        line = 'At this rate ' + goal + ' does not happen this year, or next. The fix is not more minutes per session. It is more sessions. ' + Math.ceil(needMins) + ' minutes, ' + days + ' times a week, gets you there.';
       } else if (pct < 100) {
         line = 'Closer than most people, and still short. You are ' + hrs(short) + unit(short) + ' down. Add one more session a week and you clear it with room to spare.';
       } else {
-        line = 'You are past the standard. The risk now is not intensity — it is the week you skip and never restart.';
+        line = 'You are past the standard. The risk now is not intensity. It is the week you skip and never restart.';
       }
       n('vline').textContent = line;
 
@@ -280,7 +280,7 @@
       }).then(function (r) {
         if (r.ok || r.status === 201) {
           msg.className = 'wl-note ok';
-          msg.textContent = 'You are in. Watch your inbox — invites go out in signup order.';
+          msg.textContent = 'You are in. Watch your inbox: invites go out in signup order.';
           e.target.style.display = 'none';
         } else if (r.status === 409) {
           msg.className = 'wl-note ok';
