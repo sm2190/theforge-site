@@ -137,7 +137,7 @@
     .b-tag { padding: 6px 11px; border-radius: 8px; font-size: 12px; font-weight: 800; letter-spacing: 1.4px; }
     .b-tag.bug { background: rgba(226,75,74,.14); color: #F87171; border: 1px solid rgba(226,75,74,.35); }
     .b-tag.idea { background: rgba(133,183,235,.12); color: var(--blue); border: 1px solid rgba(133,183,235,.32); }
-    .b-tag.praise { background: rgba(151,196,89,.12); color: var(--green); border: 1px solid rgba(151,196,89,.32); }
+    .b-tag.feedback { background: rgba(151,196,89,.12); color: var(--green); border: 1px solid rgba(151,196,89,.32); }
     .b-bubble {
       align-self: flex-start; max-width: 92%; background: #1F2C22; border-radius: 14px 14px 14px 4px;
       padding: 12px 14px; font-size: 14.5px; line-height: 1.5; color: #E8F5EC;
@@ -166,6 +166,7 @@
     .b-mission span { color: var(--muted); font-size: 14.5px; line-height: 1.5; }
     .b-mission li.hard { border-color: rgba(226,75,74,.35); background: linear-gradient(90deg, rgba(226,75,74,.08), var(--panel) 60%); }
     .b-mission li.hard::before { -webkit-text-stroke-color: var(--red); }
+    .b-mission .b-path { display: block; margin-top: 8px; color: var(--gold); font-size: 13px; font-weight: 700; letter-spacing: .4px; line-height: 1.6; }
 
     /* ── Known issues ─────────────────────────────────────── */
     .b-known { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; }
@@ -232,9 +233,9 @@
           to break, and you are the ones who get to break it.
         </p>
         <div class="b-facts b-rise d3">
-          <span class="b-fact"><i class="ti ti-gift" aria-hidden="true"></i>Free for the whole beta</span>
-          <span class="b-fact"><i class="ti ti-users" aria-hidden="true"></i>About 90 founding members</span>
-          <span class="b-fact"><i class="ti ti-eye" aria-hidden="true"></i>Every message read by the founder</span>
+          <span class="b-fact"><i class="ti ti-gift" aria-hidden="true"></i>Free to start</span>
+          <span class="b-fact"><i class="ti ti-users" aria-hidden="true"></i>90+ founding members</span>
+          <span class="b-fact"><i class="ti ti-eye" aria-hidden="true"></i>Every message goes through the founder</span>
         </div>
       </div>
     </section>
@@ -312,7 +313,7 @@
           <div class="b-tags">
             <span class="b-tag bug">BUG</span>
             <span class="b-tag idea">IDEA</span>
-            <span class="b-tag praise">PRAISE</span>
+            <span class="b-tag feedback">FEEDBACK</span>
           </div>
           <span class="b-report-label">A GOOD ONE LOOKS LIKE THIS</span>
           <div class="b-bubble">
@@ -329,14 +330,16 @@
     <section class="b-section" id="week-one">
       <div class="wrap">
         <p class="eyebrow">STEP THREE</p>
-        <h2 class="disp b-h2">Week one.<br>In this order.</h2>
-        <p class="b-lead">Each one tests a different part of the system. The last one is the one nobody does unless asked.</p>
+        <h2 class="disp b-h2">Follow<br>these steps.</h2>
+        <p class="b-lead">Some guidelines for your first week. The gold line under each step shows exactly where to tap.</p>
         <ol class="b-mission">
-          <li><div><strong>Write your Creed and set one commitment.</strong><span>Who you are becoming, and the first thing you will prove it with.</span></div></li>
-          <li><div><strong>Run one real focus session.</strong><span>Mid session, try to open an app you blocked. Watch what happens.</span></div></li>
-          <li><div><strong>Let Dark Hours reach you.</strong><span>When the app locks for the night, write the reflection, then sleep.</span></div></li>
-          <li><div><strong>Bring two brothers into a Triad.</strong><span>Three people who see every win and every miss.</span></div></li>
-          <li class="hard"><div><strong>Break a commitment on purpose.</strong><span>Once. See what it does to you. That feeling is the product.</span></div></li>
+          <li><div><strong>Write your Creed.</strong><span>Who you are becoming, and your goals for the year, month and week.</span><span class="b-path">CREED tab → Swear My Creed → fill it in → save</span></div></li>
+          <li><div><strong>Set one commitment.</strong><span>One thing you will prove today, with a deadline.</span><span class="b-path">HOME → Declare Intent → title and deadline → Lock In</span></div></li>
+          <li><div><strong>Choose the apps to block.</strong><span>On iPhone, allow Screen Time access when it asks.</span><span class="b-path">SYSTEM → Blocked Apps → pick your distractions</span></div></li>
+          <li><div><strong>Run one real focus session.</strong><span>Mid session, try to open an app you blocked. Watch what happens.</span><span class="b-path">HOME → Enter Focus → work → Finish &amp; Prove → add your proof</span></div></li>
+          <li><div><strong>Let Dark Hours reach you.</strong><span>When the app locks for the night, write the reflection, then sleep.</span><span class="b-path">SYSTEM → Dark Hours → set Start and End → Save Settings</span></div></li>
+          <li><div><strong>Bring two brothers into a Triad.</strong><span>Three people who see every win and every miss.</span><span class="b-path">TRIAD tab → Create a Triad → send them the code (they tap Join a Triad)</span></div></li>
+          <li class="hard"><div><strong>Break a commitment on purpose.</strong><span>Once. See what it does to you.</span><span class="b-path">HOME → Enter Focus → Abort (Fail) → write your confession</span></div></li>
         </ol>
       </div>
     </section>
@@ -353,9 +356,9 @@
             <p>On iPhone a blocked app shows Apple's Screen Time shield instead of pulling you back to the timer. That is Apple's rule, not a bug.</p>
           </article>
           <article>
-            <i class="ti ti-credit-card-off" aria-hidden="true"></i>
-            <h3>Nobody is being charged</h3>
-            <p>Payments are off for the whole beta. If anything ever asks you to pay, that is a bug. Report it.</p>
+            <i class="ti ti-moon" aria-hidden="true"></i>
+            <h3>Locked at night</h3>
+            <p>During Dark Hours the whole app locks until your window ends. No tasks, no progress. That is on purpose.</p>
           </article>
           <article>
             <i class="ti ti-book" aria-hidden="true"></i>
