@@ -37,10 +37,13 @@
     <h1>Get The Forge</h1>
     <p>The app that hates being used. Discipline, made real.</p>
 
-    <!-- Store links are filled in at public launch. Until then both buttons
-         land on the site. data-store attributes are what main logic rewrites. -->
-    <a class="btn" id="androidBtn" data-store="https://play.google.com/store/apps/details?id=com.theforge.app" href="../">Get it on Google Play</a>
-    <a class="btn ghost" id="iosBtn" data-store="" href="../">Download on the App Store</a>
+    <!-- Every in-app share links here, so where people land is decided on the
+         website, never in an app build. During the beta: iPhone goes to the
+         public TestFlight link; Android goes to the waitlist (Google's closed
+         test only admits people on the tester list). At public launch, flip
+         the *_LIVE flags below and set the App Store URL. -->
+    <a class="btn" id="androidBtn" data-store="https://play.google.com/store/apps/details?id=com.theforge.app" href="../join/">Android: join the beta waitlist</a>
+    <a class="btn ghost" id="iosBtn" data-store="https://testflight.apple.com/join/Myg3b4HA" href="../">iPhone: join the beta on TestFlight</a>
 
     <div class="ref" id="refBox" hidden>
       Your invite code, enter it during onboarding:
@@ -51,8 +54,8 @@
   <script>
     (function () {
       // LIVE flags: flip to true when each store listing is public.
-      var ANDROID_LIVE = false;
-      var IOS_LIVE = false;
+      var ANDROID_LIVE = false;   // Play production listing public?
+      var IOS_LIVE = true;        // iOS target live? (TestFlight public beta now)
 
       var params = new URLSearchParams(location.search);
       var ref = (params.get('ref') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 8);
@@ -69,6 +72,10 @@
         // Play Install Referrer keeps the invite code through install.
         if (ref) playUrl += '&referrer=' + encodeURIComponent('ref=' + ref);
         androidBtn.href = playUrl;
+        androidBtn.textContent = 'Get it on Google Play';
+      } else {
+        // Beta: the waitlist signup carries the invite code into ref_code.
+        androidBtn.href = '../join/?src=get' + (ref ? '&ref=' + encodeURIComponent(ref) : '');
       }
       if (IOS_LIVE && iosBtn.getAttribute('data-store')) {
         iosBtn.href = iosBtn.getAttribute('data-store');
@@ -77,7 +84,9 @@
       // Auto-forward when we can tell the platform AND that store is live.
       var ua = navigator.userAgent || '';
       if (ANDROID_LIVE && /Android/i.test(ua)) location.replace(androidBtn.href);
-      else if (IOS_LIVE && /iPhone|iPad|iPod/i.test(ua)) location.replace(iosBtn.href);
+      // With an invite code, stay so they can see and copy it (TestFlight has no
+      // install referrer to carry it for them).
+      else if (IOS_LIVE && !ref && /iPhone|iPad|iPod/i.test(ua)) location.replace(iosBtn.href);
     })();
   </script>
   <script src="../track.js" defer></script>
