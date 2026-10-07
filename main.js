@@ -63,11 +63,11 @@
   // ── Pricing: monthly / yearly toggle ───────────────────────────
   var PRICING = {
     monthly: {
-      iron:     { price: '$10', unit: '/month', sub: '14-day free trial in-app, then $10/mo.', pay: 'https://buy.stripe.com/test_8x23cu0Ym0eV5ZBappfnO04' },
+      iron:     { price: '$10', unit: '/month', sub: '14-day free trial in-app, then $10/mo.', pay: 'https://buy.stripe.com/dRmeVcctxdpS3db8CZasg00' },
       founding: { price: '$20', unit: '/month', sub: 'Locked in forever. The price disappears when the cohort closes.' }
     },
     yearly: {
-      iron:     { price: '$102', unit: '/year', sub: '15% off $120. 14-day free trial in-app.', pay: 'https://buy.stripe.com/test_14AbJ0ePcd1Hds3fJJfnO05' },
+      iron:     { price: '$102', unit: '/year', sub: '15% off $120. 14-day free trial in-app.', pay: 'https://buy.stripe.com/00w28q0KP85yeVT5qNasg01' },
       founding: { price: '$240', unit: '/year', sub: 'Year-long contract, pay in full or monthly. Locked in forever.' }
     }
   };
