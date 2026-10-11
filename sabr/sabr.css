@@ -130,20 +130,17 @@ textarea.fld { min-height:72px; }
 
 /* ── Print / Save as PDF ────────────────────────────────────── */
 @media print {
-  @page { margin: 14mm; }
-  body { background:#fff !important; color:#000 !important; }
-  .sf { padding:0; max-width:none; }
+  @page { margin: 0; size: A4; }
+  html, body { background:#0A0A0A !important; color:#fff !important;
+               -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .sf { padding:14mm; max-width:none; }
   .back, .panic, .chips, .savebar, .cta, .timer, nav, footer, .noprint { display:none !important; }
-  .sf h1, .sf h2, .lede, .body, .tr, .ar, .whead .ar, .say p, .types p, .venn p, .ticks span small, .drill .how { color:#000 !important; }
-  .kicker, .drill h3, .tr .lbl, .ev .tag, .sin { color:#7a5a00 !important; }
-  .wall, .ev, .types div, .venn div, .say p, .ticks label, .drill, .quote, .name { background:#fff !important; border-color:#bbb !important; box-shadow:none !important; }
-  .wnum { -webkit-text-stroke:1.2px #7a5a00; }
-  .wall { break-inside:auto; page-break-before:auto; margin-top:16px; }
+  .wall { break-inside:auto; margin-top:16px; }
   .whead { break-after:avoid; page-break-after:avoid; }
   .ev, .lines li, .ticks label { break-inside:avoid; }
   .quote, .drill { break-inside:auto; }
   .fld { display:none !important; }
-  .pv { display:block; white-space:pre-wrap; border-bottom:1px solid #999; min-height:1.6em; padding:4px 2px; font:14px/1.5 'Inter',sans-serif; color:#000; }
-  .ref { color:#555 !important; }
-  .ticks input { accent-color:#000; }
+  .pv { display:block; white-space:pre-wrap; border-bottom:1px solid #444; min-height:1.6em; padding:4px 2px;
+        font:14px/1.5 'Inter',sans-serif; color:#fff; }
 }
