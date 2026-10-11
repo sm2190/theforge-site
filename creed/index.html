@@ -351,8 +351,10 @@
         headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: email,
-          source: params.get('src') || params.get('utm_source') || 'creed',
-          ref_code: params.get('ref') || null
+          // URL params are attacker-controlled: clamp to what the table accepts
+          // (source <= 60, ref_code <= 40) so a long ?src= can't fail a real signup.
+          source: (params.get('src') || params.get('utm_source') || 'creed').replace(/[^\w.-]/g, '').slice(0, 60) || 'creed',
+          ref_code: (params.get('ref') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 40) || null
         })
       }).then(function (r) {
         if (r.ok || r.status === 201) {

@@ -174,8 +174,10 @@
         },
         body: JSON.stringify({
           email: email,
-          source: p.get('src') || p.get('utm_source') || 'join',
-          ref_code: p.get('ref') || null
+          // URL params are attacker-controlled: clamp to what the table accepts
+          // (source <= 60, ref_code <= 40) so a long ?src= can't fail a real signup.
+          source: (p.get('src') || p.get('utm_source') || 'join').replace(/[^\w.-]/g, '').slice(0, 60) || 'join',
+          ref_code: (p.get('ref') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 40) || null
         })
       }).then(function (r) {
         if (r.ok || r.status === 201) {
