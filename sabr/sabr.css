@@ -21,6 +21,12 @@ section.blk { margin-top:56px; }
 .ref { display:block; margin-top:6px; font-size:12.5px; font-style:italic; color:var(--faint); line-height:1.5; }
 .ref[dir="rtl"] { text-align:right; }
 .tr { color:#D9DCE1; font-size:15.5px; line-height:1.7; margin-top:10px; text-wrap:pretty; }
+/* Verse-end numbers (Arabic) and verse numbers in the English */
+.an { color:var(--gold); font-size:.78em; white-space:nowrap; margin:0 .1em; }
+.vn { color:var(--gold); font-weight:800; font-size:.72em; margin:0 3px 0 2px; }
+.ar b { color:#fff; font-weight:700; }
+.answer { color:var(--faint); font-style:italic; font-size:15px; line-height:1.6; padding:10px 14px;
+          border-left:3px solid var(--line-2); margin-top:4px; }
 .tr .lbl { display:inline-block; font-size:10.5px; font-weight:800; letter-spacing:2px; text-transform:uppercase;
            color:var(--gold); margin-right:6px; }
 .quote { border-left:3px solid var(--gold); background:linear-gradient(90deg, rgba(250,204,21,.06), transparent 70%);
@@ -57,6 +63,9 @@ section.blk { margin-top:56px; }
 
 /* ── Sabr types ─────────────────────────────────────────────── */
 .types { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; }
+/* Same order as the Arabic above it, which reads right to left: the first one
+   named (away from sin) sits on the right. Stacked on phones, it comes first. */
+@media (min-width:641px) { .types { direction:rtl; } .types > div { direction:ltr; } }
 .types div { border:1px solid var(--line); background:var(--panel); border-radius:12px; padding:16px; }
 .types .ar { font-size:21px; line-height:1.7; }
 .types p { color:#D1D5DB; font-size:14.5px; line-height:1.55; margin-top:6px; }
