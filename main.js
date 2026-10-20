@@ -107,6 +107,38 @@
       a.setAttribute('href', '#waitlist');
       a.textContent = 'Join the waitlist';
     });
+  } else {
+    // Launch: ask for the sign-in email first and pre-fill it at checkout, so
+    // the payment lands on the same email the app checks. Without JS the
+    // button still goes straight to Stripe.
+    document.querySelectorAll('[data-pay]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        if (a.parentNode.querySelector('.pay-email')) return;
+        e.preventDefault();
+        var f = document.createElement('form');
+        f.className = 'pay-email';
+        f.noValidate = true;
+        f.innerHTML =
+          '<label class="tier-sub" for="payEmail" style="display:block;margin:12px 0 6px;font-size:13px">Your sign-in email for The Forge</label>' +
+          '<input id="payEmail" type="email" autocomplete="email" placeholder="you@example.com" style="width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:#fff;font-size:15px">' +
+          '<button type="submit" class="btn btn-gold btn-block" style="margin-top:10px">Continue to payment</button>' +
+          '<p class="tier-sub pay-err" role="alert" style="margin-top:8px;font-size:12.5px"></p>';
+        a.insertAdjacentElement('afterend', f);
+        a.style.display = 'none';
+        f.addEventListener('submit', function (ev) {
+          ev.preventDefault();
+          var em = (f.querySelector('input').value || '').trim();
+          if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em) || em.length > 254) {
+            f.querySelector('.pay-err').textContent = 'Enter the email you use to sign in to The Forge.';
+            return;
+          }
+          var url = a.getAttribute('href'); // follows the monthly / yearly toggle
+          if (!/^https:\/\/buy\.stripe\.com\//.test(url)) return;
+          location.href = url + (url.indexOf('?') < 0 ? '?' : '&') + 'prefilled_email=' + encodeURIComponent(em);
+        });
+        f.querySelector('input').focus();
+      });
+    });
   }
 
   // Live count for social proof (only shown once it's non-trivial).
