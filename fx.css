@@ -92,6 +92,11 @@ body::after {
 }
 .forge3d-tag b { font-family: 'Anton', sans-serif; font-size: 22px; font-weight: 400; color: var(--gold); line-height: 1; }
 .forge3d.is-live .forge3d-tag { opacity: 1; transform: none; }
+.forge3d-tag.tag-2 { left: auto; right: 2%; bottom: auto; top: 14%; transition-delay: 2.2s; }
+.forge3d-tag .ti { font-size: 22px; color: var(--red); }
+
+/* Snappy UI curve for small interactions (measured on the habitline template) */
+.btn, .bt-opt, .store { transition-timing-function: cubic-bezier(.87, 0, .13, 1); transition-duration: .35s; }
 
 /* ── Crossing marquee bands ── */
 .bands { position: relative; height: 150px; overflow: hidden; margin: 10px 0; }
@@ -213,6 +218,7 @@ body::after {
 @media (max-width: 960px) {
   .hero { min-height: 0; }
   .hero-grid { grid-template-columns: 1fr; gap: 20px; }
+  .forge3d-tag.tag-2 { top: 0; right: 0; }
   .forge3d { max-width: 420px; aspect-ratio: 1 / 1; }
   .bento { grid-template-columns: repeat(2, 1fr); }
   .card-big { grid-row: span 1; }
@@ -233,6 +239,7 @@ body::after {
   .chip { font-size: 11px; padding: 8px 11px; }
   .chip-a { left: -2%; top: 8%; } .chip-b { right: -2%; bottom: -3%; }
   .forge3d-tag { left: 0; bottom: 4%; }
+  .forge3d-tag.tag-2 { left: auto; right: 0; top: 0; }
   .bands { height: 120px; }
   .band .marquee-track span { font-size: 17px; }
   .cta-wm { font-size: 34vw; }
