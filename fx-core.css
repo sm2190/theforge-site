@@ -1,0 +1,103 @@
+/* ============================================================
+   THE FORGE: shared depth + motion layer for the inner pages.
+   Mirrors the core of fx.css (the homepage layer) with class names that
+   don't collide with the pages' own (.card, .cta, .pill, .chip ...).
+   Works with or without styles.css loaded.
+   ============================================================ */
+
+/* Motion measured from live reference sites (extract-site): Framer's
+   spring as CSS linear(), Resend's curve as the fallback. */
+:root {
+  --ease: cubic-bezier(.25, .1, .35, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+  --fx-line: rgba(255,255,255,.09);
+  --fx-line-2: rgba(255,255,255,.16);
+}
+@supports (transition-timing-function: linear(0, 1)) {
+  :root {
+    --ease: linear(0, .024 2.56%, .0823 5.13%, .1594 7.69%, .2448 10.26%, .3315 12.82%, .4152 15.38%, .4934 17.95%, .5646 20.51%, .6282 23.08%, .6844 25.64%, .7334 28.21%, .7758 30.77%, .8122 33.33%, .8432 35.9%, .8694 38.46%, .8916 41.03%, .9102 43.59%, .9258 46.15%, .9388 48.72%, .9496 51.28%, .9586 53.85%, .966 56.41%, .9722 58.97%, .9772 61.54%, .9814 64.1%, .9848 66.67%, .9876 69.23%, .9899 71.79%, .9918 74.36%, .9933 76.92%, .9946 79.49%, .9956 82.05%, .9964 84.62%, .9971 87.18%, .9977 89.74%, .9981 92.31%, .9985 94.87%, .9988 97.44%, 1);
+  }
+}
+
+/* ── Film grain ── */
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .055;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Backdrop: blueprint grid + forge glow, behind all content ── */
+.fx-backdrop {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(48% 38% at 50% -4%, rgba(245,158,11,.20), rgba(245,158,11,0) 70%),
+    linear-gradient(var(--fx-line) 1px, transparent 1px) 0 0 / 72px 72px,
+    linear-gradient(90deg, var(--fx-line) 1px, transparent 1px) 0 0 / 72px 72px;
+  -webkit-mask-image: radial-gradient(80% 60% at 50% 0%, #000 20%, transparent 75%);
+          mask-image: radial-gradient(80% 60% at 50% 0%, #000 20%, transparent 75%);
+}
+
+/* ── Headline word reveal + gold sweep ── */
+.split .w { display: inline-block; overflow: hidden; vertical-align: top; padding: .06em 0 .08em; margin: -.06em 0 -.08em; }
+.split .wi { display: inline-block; transform: translateY(108%) rotate(4deg); transform-origin: 0 100%; transition: transform 1s var(--ease); }
+.split.in .wi { transform: none; }
+.gold .wi, .gold.sheen {
+  background: linear-gradient(100deg, #F59E0B 0%, #FACC15 30%, #FFF3B0 45%, #FACC15 60%, #D97706 100%);
+  background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: sheen 6s var(--ease-io) infinite;
+}
+@keyframes sheen { 0%, 100% { background-position: 100% 0; } 50% { background-position: 0 0; } }
+
+/* ── Soft entrance (blur + rise). Hidden only once JS is confirmed. ── */
+.js .fx-in { opacity: 0; filter: blur(10px); translate: 0 14px; transition: opacity .9s var(--ease), filter .9s var(--ease), translate .9s var(--ease), transform .5s var(--ease); }
+.js .fx-in.in { opacity: 1; filter: none; translate: none; }
+.js .fx-d1 { transition-delay: .3s; } .js .fx-d2 { transition-delay: .45s; } .js .fx-d3 { transition-delay: .6s; }
+
+/* ── Spotlight that follows the pointer (fx.js sets --mx/--my on .tilt) ── */
+.spot { position: relative; isolation: isolate; }
+.spot::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0; transition: opacity .35s;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(250,204,21,.10), transparent 45%);
+}
+.spot:hover::before, .spot:focus-within::before { opacity: 1; }
+.spot { transition: border-color .3s, box-shadow .3s; }
+.spot:hover, .spot:focus-within { border-color: rgba(250,204,21,.35); box-shadow: 0 24px 70px rgba(0,0,0,.45), 0 0 0 1px rgba(250,204,21,.08); }
+
+/* 3D tilt for cards that aren't forms */
+.tilt3d { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .5s var(--ease), border-color .3s, box-shadow .3s, opacity .9s var(--ease), filter .9s var(--ease), translate .9s var(--ease); }
+
+/* ── The 3D Monolith stage (assets/hero3d.js) ── */
+.forge3d { position: relative; width: 100%; max-width: 320px; aspect-ratio: 1 / 1; margin: 0 auto; }
+.forge3d::before {
+  content: ''; position: absolute; left: 12%; right: 12%; bottom: 6%; height: 36%; z-index: 0;
+  background: radial-gradient(ellipse at 50% 80%, rgba(245,158,11,.30), rgba(245,158,11,0) 70%); filter: blur(10px);
+}
+.forge3d canvas {
+  -webkit-mask-image: radial-gradient(56% 56% at 50% 50%, #000 58%, transparent 100%);
+          mask-image: radial-gradient(56% 56% at 50% 50%, #000 58%, transparent 100%);
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; opacity: 0; transform: scale(.94);
+  transition: opacity 1.4s var(--ease), transform 1.6s var(--ease);
+}
+.forge3d.is-live canvas { opacity: 1; transform: none; }
+/* Fallback (the app icon), shown only if the 3D never comes up */
+.forge3d .fallback { position: absolute; left: 50%; top: 50%; width: 34%; translate: -50% -50%; opacity: 0; animation: fx-fallback .6s var(--ease) 2.6s forwards; }
+.forge3d.is-live .fallback { display: none; }
+@keyframes fx-fallback { to { opacity: 1; } }
+
+/* ── Long-form documents: glass lede, gold markers ── */
+.fx-doc .lede { background: linear-gradient(160deg, rgba(250,204,21,.07), rgba(20,20,20,.6)); backdrop-filter: blur(8px); border-radius: 0 12px 12px 0; }
+.fx-doc h2 { position: relative; }
+.fx-doc h2::before { content: ''; display: inline-block; width: 7px; height: 7px; background: currentColor; transform: rotate(45deg) translateY(-3px); margin-right: 12px; }
+
+/* A result card that lands in 3D the moment it is revealed */
+.fx-flip { animation: fx-flip 1.1s var(--ease) both; transform-origin: 50% 0; }
+@keyframes fx-flip { from { opacity: 0; transform: perspective(1000px) rotateX(-24deg) translateY(30px); } to { opacity: 1; transform: none; } }
+
+@media print { body::after, .fx-backdrop { display: none !important; } .split .wi, .js .fx-in { transform: none !important; translate: none !important; opacity: 1 !important; filter: none !important; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-flip { animation: none; }
+  .split .wi, .js .fx-in { transform: none; translate: none; opacity: 1; filter: none; }
+  .gold .wi, .gold.sheen { animation: none; }
+  .forge3d canvas { transition: none; transform: none; }
+  .tilt3d { transform: none; }
+}

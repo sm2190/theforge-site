@@ -15,6 +15,8 @@
   <meta property="og:image" content="../assets/feature-graphic.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../fx-core.css" />
+  <script>document.documentElement.classList.add('js');</script>
   <style>
     .tool { max-width: 720px; margin: 0 auto; padding: 64px 22px 110px; }
     .back { display:inline-block; margin-bottom:26px; color:var(--muted); font-size:13px;
@@ -89,17 +91,18 @@
   </style>
 </head>
 <body>
+  <div class="fx-backdrop" aria-hidden="true"></div>
   <main class="tool">
     <a class="back" href="../">&larr; The Forge</a>
     <p class="kicker">The Gap Test</p>
-    <h1>Are you<br>actually on pace?</h1>
-    <p class="lede">
+    <h1 class="split">Are you<br>actually <span class="gold">on pace</span>?</h1>
+    <p class="lede fx-in fx-d1">
       Spend <b>100 hours a year</b> on one thing and you will be better at it than
       almost everyone around you. That is roughly <b>2 hours a week</b>. Most people
       believe they are close. Almost nobody is. Thirty seconds to find out.
     </p>
 
-    <form class="card" id="gapForm" novalidate>
+    <form class="card spot tilt fx-in fx-d2" id="gapForm" novalidate>
       <div class="fld">
         <label for="goal">What are you chasing this year?</label>
         <input type="text" id="goal" maxlength="90" placeholder="Memorise Juz Amma / Get to 80kg lean / Ship my app" autocomplete="off" />
@@ -122,7 +125,7 @@
     </form>
 
     <div id="result">
-      <div class="verdict" id="verdict">
+      <div class="verdict fx-flip" id="verdict">
         <p class="vlabel" id="vlabel">Your pace</p>
         <div class="vbig" id="vbig">0</div>
         <p class="vsub" id="vsub"></p>
@@ -141,7 +144,7 @@
         <div class="verdictline"><p id="vline"></p></div>
       </div>
 
-      <div class="cta">
+      <div class="cta spot tilt">
         <h3>Knowing the number changes nothing</h3>
         <p>
           You already knew you were behind. The gap is not an information problem.
@@ -297,5 +300,6 @@
     });
   })();
   </script>
+  <script src="../assets/fx.js"></script>
 </body>
 </html>

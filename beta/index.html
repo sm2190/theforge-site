@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- No inline script at all: the only script is beta.js from this origin. -->
+  <!-- No inline script at all: every script (beta.js, the motion layer, the 3D Monolith) is a file from this origin. -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,6 +17,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css" />
   <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../fx-core.css" />
+  <link rel="modulepreload" href="../assets/three.module.min.js" />
   <style>
     /* ── Beta page. Everything inherits the site's tokens (styles.css). ── */
     body { overflow-x: hidden; }
@@ -226,6 +228,10 @@
     <section class="b-section b-hero">
       <div class="b-glow" aria-hidden="true"></div>
       <div class="wrap">
+        <div class="forge3d" aria-hidden="true" style="max-width:250px;margin:-40px auto -22px">
+          <canvas></canvas>
+          <img class="fallback" src="../assets/app-icon.png" alt="" />
+        </div>
         <p class="b-seal b-rise"><span class="dot" aria-hidden="true"></span>FOUNDING COHORT · CLOSED BETA</p>
         <h1 class="disp b-title b-rise d1">You're in.<br><span class="gold">Now forge.</span></h1>
         <p class="b-lead b-rise d2">
@@ -244,11 +250,11 @@
     <section class="b-section" id="install">
       <div class="wrap">
         <p class="eyebrow">STEP ONE</p>
-        <h2 class="disp b-h2">Get it on your phone.</h2>
+        <h2 class="disp b-h2 split">Get it on your phone.</h2>
         <p class="b-lead">Two minutes, either way. Sign in with the same Google or Apple account you will keep using.</p>
 
         <div class="b-install-grid">
-          <article class="b-card" data-os="ios" aria-labelledby="ios-h">
+          <article class="b-card spot tilt tilt3d" data-tilt="3" data-os="ios" aria-labelledby="ios-h">
             <span class="b-yours">YOUR PHONE</span>
             <div class="b-card-head">
               <span class="b-os"><i class="ti ti-brand-apple" aria-hidden="true"></i></span>
@@ -263,7 +269,7 @@
             <p class="b-note"><b>When it asks for Screen Time access, allow it.</b> That is what lets The Forge lock the apps you choose during a focus session and at night.</p>
           </article>
 
-          <article class="b-card" data-os="android" aria-labelledby="and-h">
+          <article class="b-card spot tilt tilt3d" data-tilt="3" data-os="android" aria-labelledby="and-h">
             <span class="b-yours">YOUR PHONE</span>
             <div class="b-card-head">
               <span class="b-os"><i class="ti ti-brand-android" aria-hidden="true"></i></span>
@@ -294,7 +300,7 @@
       <div class="wrap b-circle">
         <div>
           <p class="eyebrow">STEP TWO</p>
-          <h2 class="disp b-h2">Join the<br>founding circle.</h2>
+          <h2 class="disp b-h2 split">Join the<br>founding circle.</h2>
           <p class="b-lead">
             One group, all of us. It is where you tell me what breaks, what confuses you and what is
             missing. Most of what gets sent there gets fixed, Inshallah.
@@ -330,7 +336,7 @@
     <section class="b-section" id="week-one">
       <div class="wrap">
         <p class="eyebrow">STEP THREE</p>
-        <h2 class="disp b-h2">Follow<br>these steps.</h2>
+        <h2 class="disp b-h2 split">Follow<br>these steps.</h2>
         <p class="b-lead">Some guidelines for your first week. The gold line under each step shows exactly where to tap.</p>
         <ol class="b-mission">
           <li><div><strong>Write your Creed.</strong><span>Who you are becoming, and your goals for the year, month and week.</span><span class="b-path">CREED tab → Swear My Creed → fill it in → save</span></div></li>
@@ -338,7 +344,7 @@
           <li><div><strong>Choose the apps to block.</strong><span>On iPhone, allow Screen Time access when it asks.</span><span class="b-path">SYSTEM → Blocked Apps → pick your distractions</span></div></li>
           <li><div><strong>Run one real focus session.</strong><span>Mid session, try to open an app you blocked. Watch what happens.</span><span class="b-path">HOME → Enter Focus → work → Finish &amp; Prove → add your proof</span></div></li>
           <li><div><strong>Let Dark Hours reach you.</strong><span>When the app locks for the night, write the reflection, then sleep.</span><span class="b-path">SYSTEM → Dark Hours → set Start and End → Save Settings</span></div></li>
-          <li><div><strong>Bring two brothers into a Triad.</strong><span>Three people who see every win and every miss.</span><span class="b-path">TRIAD tab → Create a Triad → send them the code (they tap Join a Triad)</span></div></li>
+          <li><div><strong>Bring in the friends you choose.</strong><span>They see every win and every miss.</span><span class="b-path">TRIAD tab → Create a Triad → send them the code (they tap Join a Triad)</span></div></li>
           <li class="hard"><div><strong>Break a commitment on purpose.</strong><span>Once. See what it does to you.</span><span class="b-path">HOME → Enter Focus → Abort (Fail) → write your confession</span></div></li>
         </ol>
       </div>
@@ -348,7 +354,7 @@
     <section class="b-section" id="known">
       <div class="wrap">
         <p class="eyebrow">ALREADY ON THE LIST</p>
-        <h2 class="disp b-h2">Not bugs.<br>Save your breath.</h2>
+        <h2 class="disp b-h2 split">Not bugs.<br>Save your breath.</h2>
         <div class="b-known">
           <article>
             <i class="ti ti-shield-lock" aria-hidden="true"></i>
@@ -384,6 +390,8 @@
     </div>
   </footer>
 
+  <script src="../assets/fx.js"></script>
+  <script type="module" src="../assets/hero3d.js"></script>
   <script src="beta.js"></script>
 </body>
 </html>

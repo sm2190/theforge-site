@@ -3,6 +3,8 @@
    depth, the streak demo. Everything degrades to a still page. */
 (function () {
   'use strict';
+  // Pages whose CSP blocks inline scripts can't set this in <head>.
+  document.documentElement.classList.add('js');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 

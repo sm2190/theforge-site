@@ -8,6 +8,12 @@
   <title>Get The Forge</title>
   <meta name="description" content="Download The Forge, the app that hates being used.">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800;900&display=swap" />
+  <link rel="stylesheet" href="../fx-core.css" />
+  <link rel="modulepreload" href="../assets/three.module.min.js" />
+  <script>document.documentElement.classList.add('js');</script>
   <style>
     :root { --gold: #FACC15; --bg: #0A0A0A; --muted: #9CA3AF; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,7 +24,11 @@
     }
     .card { max-width: 420px; text-align: center; }
     img.icon { width: 84px; height: 84px; border-radius: 20px; margin-bottom: 20px; }
-    h1 { font-size: 32px; font-weight: 900; letter-spacing: -1px; text-transform: uppercase; margin-bottom: 10px; }
+    h1 { font-family: 'Anton', system-ui, sans-serif; font-size: clamp(40px, 11vw, 60px); font-weight: 400; line-height: .95; letter-spacing: -.5px; text-transform: uppercase; margin-bottom: 12px; }
+    .forge3d { max-width: 260px; margin: -30px auto -20px; }
+    .btn { border-radius: 10px; transition: transform .35s cubic-bezier(.87,0,.13,1), box-shadow .35s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 44px rgba(245,158,11,.32); }
+    .ref { border-radius: 10px; }
     p { color: var(--muted); font-size: 15px; line-height: 1.5; margin-bottom: 26px; }
     .btn {
       display: block; background: var(--gold); color: #000; text-decoration: none;
@@ -32,10 +42,14 @@
   </style>
 </head>
 <body>
+  <div class="fx-backdrop" aria-hidden="true"></div>
   <div class="card">
-    <img class="icon" src="../assets/app-icon.png" alt="The Forge">
-    <h1>Get The Forge</h1>
-    <p>The app that hates being used. Discipline, made real.</p>
+    <div class="forge3d" aria-hidden="true">
+      <canvas></canvas>
+      <img class="fallback" src="../assets/app-icon.png" alt="" />
+    </div>
+    <h1 class="split">Get <span class="gold">The Forge</span></h1>
+    <p class="fx-in fx-d1">The app that hates being used. Discipline, made real.</p>
 
     <!-- Every in-app share links here, so where people land is decided on the
          website, never in an app build. During the beta: iPhone goes to the
@@ -89,6 +103,8 @@
       else if (IOS_LIVE && !ref && /iPhone|iPad|iPod/i.test(ua)) location.replace(iosBtn.href);
     })();
   </script>
+  <script src="../assets/fx.js"></script>
+  <script type="module" src="../assets/hero3d.js"></script>
   <script src="../track.js" defer></script>
 </body>
 </html>
