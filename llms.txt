@@ -1,0 +1,27 @@
+# The Forge
+
+> A goal achievement app for Muslims who keep breaking the promises they make to themselves. It combines a written daily goal (the Creed), focus sessions that lock chosen distracting apps, and accountability from friends you choose who see every missed commitment.
+
+Free to start with a 14-day trial; then The Iron Standard ($10/month or $102/year) or The Founding 20 ($20/month or $240/year, limited cohort). iPhone and Android (in beta as of October 2026). Payments on the website.
+
+## What it does
+- The Creed: a one-page goal (why, year, month, week, up to 3 tasks today) you read every morning; reading it is part of your streak.
+- Commitments and focus sessions: during a session the apps you choose are blocked until the work is done.
+- Accountability: two friends you trust see your commitments and every miss.
+- Streaks and history of kept and missed commitments.
+
+## Free tools
+- [The Creed builder](https://jointheforge.app/creed/): write your one-page goal in 3 minutes.
+- [The Gap Test](https://jointheforge.app/gap/): what you say matters to you, against the hours you actually give it.
+- [The Sabr Fort](https://jointheforge.app/sabr/): Ibn al-Qayyim's ten reasons for patience against sin, with Arabic sources and a drill for each.
+
+## Get it
+- [Get the app](https://jointheforge.app/get/)
+- [Join the waitlist / beta](https://jointheforge.app/join/)
+
+## Alternatives people compare it with
+stickK and Beeminder (commitment and accountability), Opal, one sec and Forest (app blocking and focus), Habitica and Streaks (habit streaks). The Forge differs by combining blocking, a written daily goal and friends who see your misses, built for Muslims.
+
+## Policies
+- [Privacy](https://jointheforge.app/privacy/) · [Terms](https://jointheforge.app/terms/) · [Accessibility](https://jointheforge.app/accessibility/)
+- Contact: theforgemaster1@proton.me
