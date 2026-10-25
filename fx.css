@@ -60,7 +60,7 @@ body::after {
 }
 .hero-wm { color: transparent; -webkit-text-stroke: 1px rgba(250,204,21,.08); font-size: 300px; top: 6%; right: -4%; }
 .hero-grid { grid-template-columns: 1.1fr 1fr; width: 100%; }
-.hero h1 { font-size: clamp(48px, 7.4vw, 104px); letter-spacing: -2px; line-height: .9; }
+.hero h1 { font-size: clamp(44px, 6.2vw, 92px); letter-spacing: -1.5px; line-height: .92; }
 .pill {
   display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px;
   padding: 7px 14px 7px 10px; border-radius: 999px; border: 1px solid rgba(250,204,21,.28);
