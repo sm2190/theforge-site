@@ -49,6 +49,24 @@
     watch.forEach(function (el) { el.classList.add('in'); });
   }
 
+  // Safety net: on a busy or slow device the observer can miss an element
+  // that scrolled past between two rendering updates, leaving it invisible.
+  // Anything whose top is above the bottom of the screen gets revealed.
+  var pending = document.querySelectorAll('.split, .fx-in, .reveal');
+  var sweepQueued = false;
+  var sweep = function () {
+    sweepQueued = false;
+    var vh = window.innerHeight, left = 0;
+    pending.forEach(function (el) {
+      if (el.classList.contains('in')) return;
+      if (el.getBoundingClientRect().top < vh) el.classList.add('in'); else left++;
+    });
+    if (!left) { window.removeEventListener('scroll', onSweep); }
+  };
+  var onSweep = function () { if (!sweepQueued) { sweepQueued = true; setTimeout(sweep, 160); } };
+  window.addEventListener('scroll', onSweep, { passive: true });
+  window.addEventListener('load', function () { setTimeout(sweep, 1200); });
+
   // ── 3D tilt + pointer spotlight ──
   if (fine && !reduce) {
     document.querySelectorAll('.tilt').forEach(function (el) {

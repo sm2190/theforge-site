@@ -136,9 +136,23 @@ function start() {
   // ── Loop ──
   const clock = new THREE.Clock();
   let t = 0, flash = 0;
+  // Adaptive quality: a slow GPU (old phone, software rendering) first drops
+  // to 1x resolution, then freezes on a still frame so the page stays smooth.
+  let perfFrames = 0, perfTime = 0, perfStage = 0, frozen = false;
   function frame() {
-    const dt = Math.min(clock.getDelta(), 1 / 30);
+    const raw = clock.getDelta();
+    const dt = Math.min(raw, 1 / 30);
     t += dt;
+    if (t > 2.5 && perfStage < 2) {
+      perfFrames++; perfTime += raw;
+      if (perfFrames === 60) {
+        const avg = perfTime / perfFrames;
+        perfFrames = 0; perfTime = 0;
+        if (avg > 0.045 && perfStage === 0) { renderer.setPixelRatio(1); resize(); perfStage = 1; }
+        else if (avg > 0.06 && perfStage === 1) { perfStage = 2; frozen = true; }
+        else perfStage = 2;   // fast enough, stop measuring
+      }
+    }
 
     pointer.x += (pointer.tx - pointer.x) * 0.06;
     pointer.y += (pointer.ty - pointer.y) * 0.06;
@@ -179,12 +193,13 @@ function start() {
     if (EMBERS) { eGeo.attributes.position.needsUpdate = true; eGeo.attributes.color.needsUpdate = true; }
 
     renderer.render(scene, camera);
+    if (frozen) sync();
   }
 
   // Only run while the hero is on screen and the tab is visible.
   let onScreen = true, running = false;
   function sync() {
-    const should = !reduce && onScreen && !document.hidden;
+    const should = !reduce && !frozen && onScreen && !document.hidden;
     if (should && !running) { clock.getDelta(); renderer.setAnimationLoop(frame); running = true; }
     if (!should && running) { renderer.setAnimationLoop(null); running = false; }
   }
