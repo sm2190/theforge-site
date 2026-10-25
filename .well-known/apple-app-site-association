@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["6Y37V9FZPB.app.theforge.forge"],
+        "components": [
+          { "/": "/verify", "comment": "verify-membership email button" },
+          { "/": "/verify/*" },
+          { "/": "/welcome", "comment": "after-payment page" },
+          { "/": "/welcome/*" }
+        ]
+      }
+    ]
+  }
+}

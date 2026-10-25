@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'self'; object-src 'none'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="robots" content="noindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome to The Forge</title>
+  <meta name="description" content="Your Forge membership is active. Open the app to start.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800;900&display=swap" />
+  <link rel="stylesheet" href="../fx-core.css" />
+  <style>
+    :root { --gold: #FACC15; --bg: #0A0A0A; --muted: #9CA3AF; }
+    .gold { color: var(--gold); }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: 'Inter', system-ui, sans-serif; padding: 24px; }
+    .card { max-width: 480px; }
+    .kicker { color: var(--gold); font-size: 11px; font-weight: 800; letter-spacing: 3.5px; margin-bottom: 14px; text-align: center; }
+    h1 { font-family: 'Anton', system-ui, sans-serif; font-weight: 400; font-size: clamp(40px, 11vw, 60px); line-height: .95; text-transform: uppercase; margin-bottom: 16px; text-align: center; }
+    .lead { color: var(--muted); font-size: 15px; line-height: 1.6; margin-bottom: 22px; text-align: center; }
+    .btn { display: block; text-align: center; background: var(--gold); color: #000; text-decoration: none; font-weight: 900; letter-spacing: 2px; font-size: 14px; padding: 16px 20px; border-radius: 10px; margin-bottom: 12px; }
+    .btn.ghost { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
+    ol { list-style: none; counter-reset: s; display: grid; gap: 12px; margin: 26px 0 0; }
+    li { counter-increment: s; display: grid; grid-template-columns: 28px 1fr; gap: 12px; color: #D1D5DB; font-size: 14.5px; line-height: 1.55; }
+    li::before { content: counter(s); width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; background: rgba(250,204,21,.1); color: var(--gold); font-weight: 800; font-size: 13px; border: 1px solid rgba(250,204,21,.28); }
+    li b { color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="fx-backdrop" aria-hidden="true"></div>
+  <main class="card">
+    <p class="kicker">PAYMENT RECEIVED</p>
+    <h1 class="split">Welcome to <span class="gold">The Forge</span>.</h1>
+    <p class="lead">Your membership is active. Open the app and it unlocks on its own.</p>
+    <a class="btn" href="theforge://welcome">OPEN THE FORGE</a>
+    <a class="btn ghost" href="../get/">I DON'T HAVE THE APP YET</a>
+    <ol>
+      <li><span>Sign in with <b>the same email you just paid with</b>. Your membership is linked to it automatically.</span></li>
+      <li><span>Signed in with a different email (for example Apple's hidden email)? In the app open <b>Membership</b>, then <b>Already a member?</b>, and enter the email you paid with. We send a code to confirm it is yours.</span></li>
+      <li><span>Anything stuck? Email <a href="mailto:theforgemaster1@proton.me" style="color:var(--gold)">theforgemaster1@proton.me</a> and it gets fixed personally.</span></li>
+    </ol>
+  </main>
+  <script src="../assets/fx.js"></script>
+</body>
+</html>

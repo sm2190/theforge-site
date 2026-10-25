@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'self'; object-src 'none'" />
+  <!-- The URL carries a one-time token: never send it on as a referrer. -->
+  <meta name="referrer" content="no-referrer" />
+  <meta name="robots" content="noindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verify your membership | The Forge</title>
+  <meta name="description" content="Finish verifying your Forge membership in the app.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800;900&display=swap" />
+  <link rel="stylesheet" href="../fx-core.css" />
+  <style>
+    :root { --gold: #FACC15; --bg: #0A0A0A; --muted: #9CA3AF; }
+    .gold { color: var(--gold); }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: 'Inter', system-ui, sans-serif; padding: 24px; }
+    .card { max-width: 440px; text-align: center; }
+    .kicker { color: var(--gold); font-size: 11px; font-weight: 800; letter-spacing: 3.5px; margin-bottom: 14px; }
+    h1 { font-family: 'Anton', system-ui, sans-serif; font-weight: 400; font-size: clamp(38px, 10vw, 54px); line-height: .95; text-transform: uppercase; margin-bottom: 14px; }
+    p { color: var(--muted); font-size: 15px; line-height: 1.6; margin-bottom: 22px; }
+    .btn { display: block; background: var(--gold); color: #000; text-decoration: none; font-weight: 900; letter-spacing: 2px; font-size: 14px; padding: 16px 20px; border-radius: 10px; margin-bottom: 14px; }
+    .small { font-size: 13px; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="fx-backdrop" aria-hidden="true"></div>
+  <main class="card">
+    <p class="kicker">THE FORGE</p>
+    <h1>One tap <span class="gold">left</span>.</h1>
+    <p>Open this link on the phone where The Forge is installed and you are verified straight away. If it opened here instead, tap the button.</p>
+    <a class="btn" id="openApp" href="theforge://verify">OPEN THE FORGE</a>
+    <p class="small">Or open The Forge, go to Membership, and enter the 6-digit code from the email.</p>
+  </main>
+  <script>
+    // Pass the one-time token on to the app (custom scheme). Only a short
+    // URL-safe token is accepted; anything else is ignored.
+    (function () {
+      var t = new URLSearchParams(location.search).get('t') || '';
+      if (/^[A-Za-z0-9_-]{16,64}$/.test(t)) {
+        document.getElementById('openApp').href = 'theforge://verify?t=' + encodeURIComponent(t);
+      }
+    })();
+  </script>
+</body>
+</html>
