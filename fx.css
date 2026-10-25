@@ -110,17 +110,19 @@ body::after {
 .band-b .marquee-track b { color: var(--gold); margin: 0 22px; }
 .marquee-track.rev { animation-direction: reverse; animation-duration: 34s; }
 
-/* ── Inside the app: three real screens fanned in 3D ── */
+/* ── Inside the app: three real screens fanned out ──
+   2D transforms on purpose: Safari draws translateZ/rotateY phones inside a
+   scaled perspective stage as thin slivers (seen on a real iPhone). */
 .fan-sec { padding: 96px 0 40px; overflow: hidden; }
 .fan { position: relative; height: 640px; margin-top: 10px; --k: 1; }
-.fan-stage { position: relative; height: 640px; perspective: 1600px; display: flex; justify-content: center; transform-origin: 50% 0; }
-.fan .device { position: absolute; top: 10px; width: 272px; max-width: none; transform-style: preserve-3d; transition: none; }
+.fan-stage { position: relative; height: 640px; display: flex; justify-content: center; transform-origin: 50% 0; }
+.fan .device { position: absolute; top: 10px; width: 272px; max-width: none; transition: none; }
 .fan .device:hover { transform: none; }
-.fan .f-c { z-index: 3; transform: translateY(calc((1 - var(--k)) * 90px)) rotateX(calc((1 - var(--k)) * 22deg)); }
-.fan .f-l { z-index: 2; --glow: rgba(0,0,0,.7); transform: translateX(calc(-40px - var(--k) * 210px)) translateZ(calc(-260px + var(--k) * 130px)) rotateY(calc(42deg - var(--k) * 22deg)); }
-.fan .f-r { z-index: 2; --glow: rgba(0,0,0,.7); transform: translateX(calc(40px + var(--k) * 210px)) translateZ(calc(-260px + var(--k) * 130px)) rotateY(calc(-42deg + var(--k) * 22deg)); }
+.fan .f-c { z-index: 3; transform: translateY(calc((1 - var(--k)) * 70px)) scale(calc(.94 + var(--k) * .06)); }
+.fan .f-l { z-index: 2; --glow: rgba(0,0,0,.7); transform-origin: 50% 100%; transform: translateX(calc(-30px - var(--k) * var(--spread, 150px))) translateY(36px) rotate(calc(-2deg - var(--k) * 6deg)) scale(.86); filter: brightness(.8); }
+.fan .f-r { z-index: 2; --glow: rgba(0,0,0,.7); transform-origin: 50% 100%; transform: translateX(calc(30px + var(--k) * var(--spread, 150px))) translateY(36px) rotate(calc(2deg + var(--k) * 6deg)) scale(.86); filter: brightness(.8); }
 .fan .f-c.device { --halo: rgba(245,158,11,.22); }
-.fan .f-l .notch { display: none; }   /* this screenshot has its title where the island sits */
+.fan .notch { display: none; }   /* these screenshots have their titles where the island would sit */
 .fan-cap { display: flex; justify-content: center; gap: 34px; flex-wrap: wrap; color: var(--faint); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
 .fan-cap span::before { content: ''; display: inline-block; width: 6px; height: 6px; background: var(--gold); margin-right: 9px; vertical-align: middle; transform: rotate(45deg); }
 
@@ -214,6 +216,10 @@ body::after {
 }
 .cta .wrap { position: relative; z-index: 2; }
 
+/* No stranded last words in paragraphs; balanced headline lines. */
+p, li { text-wrap: pretty; }
+h1, h2, h3 { text-wrap: balance; }
+
 /* ── Responsive ── */
 @media (max-width: 960px) {
   .hero { min-height: 0; }
@@ -233,8 +239,8 @@ body::after {
   .card-big, .card-wide { grid-column: auto; }
   .streak-num { font-size: 64px; }
   .streak-cells span { height: 26px; }
-  .fan { height: 390px; }
-  .fan-stage { transform: scale(.6); }
+  .fan { height: 380px; --spread: 112px; }
+  .fan-stage { transform: scale(.56); }
   .fan-sec { padding-top: 72px; }
   .chip { font-size: 11px; padding: 8px 11px; }
   .chip-a { left: -2%; top: 8%; } .chip-b { right: -2%; bottom: -3%; }
@@ -243,6 +249,10 @@ body::after {
   .bands { height: 120px; }
   .band .marquee-track span { font-size: 17px; }
   .cta-wm { font-size: 34vw; }
+}
+@media (max-width: 360px) {
+  .fan { height: 330px; --spread: 96px; }
+  .fan-stage { transform: scale(.48); }
 }
 @media (prefers-reduced-motion: reduce) {
   .split .wi, .js .fx-in, .reveal { transform: none; translate: none; opacity: 1; filter: none; }
