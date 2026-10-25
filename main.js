@@ -83,7 +83,8 @@
       if (s) s.textContent = d[tier].sub;
     });
     var pay = document.querySelector('[data-pay="iron"]');
-    if (pay && d.iron.pay) pay.href = d.iron.pay;
+    // Pre-launch the button stays on the waitlist whichever cycle is picked.
+    if (pay && d.iron.pay && !pay.hasAttribute('data-prelaunch')) pay.href = d.iron.pay;
   }
   var cycleOpts = document.querySelectorAll('.bt-opt');
   cycleOpts.forEach(function (o) {
@@ -105,6 +106,7 @@
   if (PRELAUNCH) {
     document.querySelectorAll('[data-pay]').forEach(function (a) {
       a.setAttribute('href', '#waitlist');
+      a.setAttribute('data-prelaunch', '');
       a.textContent = 'Join the waitlist';
     });
   } else {
