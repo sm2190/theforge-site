@@ -141,6 +141,21 @@
     });
   }
 
+  // Live Founding 20 applicant count (public RPC returns a number only).
+  var fdEl = document.getElementById('fdCount');
+  if (fdEl) {
+    fetch(SB_URL + '/rest/v1/rpc/founding_applicant_count', {
+      method: 'POST',
+      headers: { apikey: SB_KEY, 'Content-Type': 'application/json' },
+      body: '{}'
+    }).then(function (r) { return r.json(); }).then(function (n) {
+      if (typeof n === 'number' && n >= 1) {
+        fdEl.innerHTML = '<span class="live-dot" aria-hidden="true"></span>';
+        fdEl.appendChild(document.createTextNode(n === 1 ? '1 person has applied so far' : n + ' people have applied so far'));
+      }
+    }).catch(function () {});
+  }
+
   // Live count for social proof (only shown once it's non-trivial).
   var countEl = document.getElementById('wlCount');
   fetch(SB_URL + '/rest/v1/rpc/waitlist_count', {
