@@ -61,10 +61,10 @@
 
     <!-- Every in-app share links here, so where people land is decided on the
          website, never in an app build. During the beta: iPhone goes to the
-         public TestFlight link; Android goes to the waitlist (Google's closed
-         test only admits people on the tester list). At public launch, flip
-         the *_LIVE flags below and set the App Store URL. -->
-    <a class="btn" id="androidBtn" data-store="https://play.google.com/store/apps/details?id=com.theforge.app" href="../join/">Android: join the beta waitlist</a>
+         public TestFlight link; Android goes to Google Play (open testing from
+         2026-10-27, so the listing is public and the install referrer carries
+         the invite code). At public launch, set the App Store URL. -->
+    <a class="btn" id="androidBtn" data-store="https://play.google.com/store/apps/details?id=com.theforge.app" href="https://play.google.com/store/apps/details?id=com.theforge.app">Android: get it on Google Play</a>
     <a class="btn ghost" id="iosBtn" data-store="https://testflight.apple.com/join/Myg3b4HA" href="../">iPhone: join the beta on TestFlight</a>
 
     <div class="ref" id="refBox" hidden>
@@ -76,7 +76,7 @@
   <script>
     (function () {
       // LIVE flags: flip to true when each store listing is public.
-      var ANDROID_LIVE = false;   // Play production listing public?
+      var ANDROID_LIVE = true;    // Play listing public (open testing, then production)
       var IOS_LIVE = true;        // iOS target live? (TestFlight public beta now)
 
       var params = new URLSearchParams(location.search);
