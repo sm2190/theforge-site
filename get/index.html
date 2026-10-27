@@ -64,7 +64,7 @@
          public TestFlight link; Android goes to Google Play (open testing from
          2026-10-27, so the listing is public and the install referrer carries
          the invite code). At public launch, set the App Store URL. -->
-    <a class="btn" id="androidBtn" data-store="https://play.google.com/store/apps/details?id=com.theforge.app" href="https://play.google.com/store/apps/details?id=com.theforge.app">Android: get it on Google Play</a>
+    <a class="btn" id="androidBtn" data-store="https://play.google.com/store/apps/details?id=com.theforge.app" href="https://play.google.com/apps/testing/com.theforge.app">Android: join the beta on Google Play</a>
     <a class="btn ghost" id="iosBtn" data-store="https://testflight.apple.com/join/Myg3b4HA" href="../">iPhone: join the beta on TestFlight</a>
 
     <div class="ref" id="refBox" hidden>
@@ -76,7 +76,7 @@
   <script>
     (function () {
       // LIVE flags: flip to true when each store listing is public.
-      var ANDROID_LIVE = true;    // Play listing public (open testing, then production)
+      var ANDROID_LIVE = false;   // true once the Play store listing page is public (it 404ed right after open testing went live)
       var IOS_LIVE = true;        // iOS target live? (TestFlight public beta now)
 
       var params = new URLSearchParams(location.search);
@@ -97,7 +97,9 @@
         androidBtn.textContent = 'Get it on Google Play';
       } else {
         // Beta: the waitlist signup carries the invite code into ref_code.
-        androidBtn.href = '../join/?src=get' + (ref ? '&ref=' + encodeURIComponent(ref) : '');
+        // Open testing: Google's join page works for any Google account.
+        androidBtn.href = 'https://play.google.com/apps/testing/com.theforge.app';
+        androidBtn.textContent = 'Android: join the beta on Google Play';
       }
       if (IOS_LIVE && iosBtn.getAttribute('data-store')) {
         iosBtn.href = iosBtn.getAttribute('data-store');
