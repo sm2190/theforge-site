@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data:; connect-src 'self' https://hlvcjroskewmoxsxwksg.supabase.co; base-uri 'none'; form-action 'self'; object-src 'none'" />
+  <script src="../assets/frame-guard.js"></script>
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0A0A0A" />
+  <title>The Forge Membership: Iron Standard, Founding 20 or a gift</title>
+  <meta name="description" content="Keep going after your 14 free days. The Iron Standard, the Founding 20 (by application), or a gift if you can't afford it.">
+  <link rel="canonical" href="https://jointheforge.app/membership/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jointheforge.app/membership/" />
+  <meta property="og:title" content="The Forge Membership" />
+  <meta property="og:description" content="Iron Standard, Founding 20, or a gift. Choose how you continue." />
+  <meta property="og:image" content="https://jointheforge.app/assets/feature-graphic.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css" integrity="sha384-3M9B/xDQKtE5Qy2ugrRtS1uY/Z4hePOYOEliLtOGcjnUaO6M715SQQxJvf1TdJcD" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../fx-core.css" />
+  <link rel="stylesheet" href="../signup.css" />
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <div class="fx-backdrop" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a href="../" class="brand" aria-label="The Forge home">
+        <img class="logo-img" src="../assets/app-icon.png" alt="" aria-hidden="true" />
+        <span class="brand-name disp">The Forge</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="../#system">The System</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="../start/">Sign up</a>
+      </nav>
+      <div class="nav-cta"><button class="nav-toggle" id="navToggle" aria-label="Open menu"><i class="ti ti-menu-2"></i></button></div>
+    </div>
+  </header>
+
+  <main class="page-wrap wide">
+    <p class="kicker">MEMBERSHIP</p>
+    <h1 class="disp">Keep going. <span class="gold">Choose how.</span></h1>
+    <p class="page-lead">Your 14 free days are for finding out whether The Forge holds. No card was ever taken, so nothing renews until you choose. Three ways to continue.</p>
+
+    <!-- Sign-in strip: only shown while signed out; pre-fills payment and unlocks the Founding application -->
+    <div class="ms-signin" id="msSignin">
+      <p>Sign in first so your payment lands on the right account, and to apply for the Founding 20.</p>
+      <div class="auth-btns" id="authBtns">
+        <button type="button" class="auth-btn google" data-provider="google"><i class="ti ti-brand-google" aria-hidden="true"></i>Google</button>
+        <button type="button" class="auth-btn apple" data-provider="apple"><i class="ti ti-brand-apple" aria-hidden="true"></i>Apple</button>
+      </div>
+      <p class="wl-note" id="msMsg" role="status" aria-live="polite" style="margin:10px 0 0"></p>
+    </div>
+    <p class="auth-fine" id="msWho" hidden style="margin-top:22px"></p>
+
+    <div class="ms-grid">
+      <!-- 1. Iron Standard -->
+      <article class="tier feat" id="iron">
+        <span class="tier-badge">Recommended</span>
+        <p class="tier-name gold">The Iron Standard</p>
+        <div class="billing-toggle" role="group" aria-label="Billing period" style="margin:4px 0 6px">
+          <button type="button" class="bt-opt active" data-cycle="monthly">Monthly</button>
+          <button type="button" class="bt-opt" data-cycle="yearly">Yearly &middot; save 15%</button>
+        </div>
+        <p class="tier-price disp"><span id="ironPrice">$10</span><small id="ironUnit">/month</small></p>
+        <p class="tier-sub" id="ironSub">Cancel any time from the billing portal.</p>
+        <ul>
+          <li><i class="ti ti-check" aria-hidden="true"></i>Everything, unlocked</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i>Deep Focus app-blocking that pulls you back</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i>Dark Hours, Wall of Shame, Leaderboard &amp; badges</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i>90-Day Anvil + full history archive</li>
+        </ul>
+        <a href="https://buy.stripe.com/dRmeVcctxdpS3db8CZasg00" id="ironPay" class="btn btn-gold btn-block">Continue with Iron</a>
+        <form id="payEmail" class="ms-form" novalidate>
+          <label class="tier-sub" for="payEmailIn" style="margin:0;min-height:0">The email you sign in to The Forge with</label>
+          <input id="payEmailIn" type="email" autocomplete="email" placeholder="you@example.com" />
+          <button type="submit" class="btn btn-gold btn-block">Continue to payment</button>
+          <p class="tier-sub pay-err" role="alert" style="margin:0;min-height:0"></p>
+        </form>
+        <p class="tier-sub" style="margin-top:10px;min-height:0">Pay with the same account you use in the app. That is how your membership unlocks.</p>
+      </article>
+
+      <!-- 2. Founding 20 -->
+      <article class="tier" id="founding">
+        <span class="tier-badge" style="background:#F59E0B">Only 20 spots</span>
+        <p class="tier-name">The Founding 20</p>
+        <p class="tier-price disp"><span id="fdPrice">$20</span><small id="fdUnit">/month</small></p>
+        <p class="tier-sub">By application, reviewed by the Forge Master. Locked in forever.</p>
+        <ul>
+          <li><i class="ti ti-check" aria-hidden="true"></i>Everything in The Iron Standard</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i>Personal access &amp; coaching from the Forge Master</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i>The Resolute 12, a 12-week masterclass</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i>Weekly cohort meetings + daily check-ins</li>
+        </ul>
+        <button type="button" id="fdOpen" class="btn btn-ghost btn-block">Apply for a Founding spot</button>
+        <form id="fdForm" class="ms-form" novalidate>
+          <label class="sr-only" for="fdName">Your name</label>
+          <input id="fdName" type="text" maxlength="80" autocomplete="name" placeholder="Your name" />
+          <label class="sr-only" for="fdMsg">Why you, and what you want to forge</label>
+          <textarea id="fdMsg" maxlength="1000" placeholder="Why you, and what you want to forge. At least 20 characters."></textarea>
+          <button type="submit" class="btn btn-gold btn-block" id="fdSend">Send my application</button>
+        </form>
+        <p class="tier-sub wl-note" id="fdNote" role="status" aria-live="polite" style="min-height:0"></p>
+        <p class="tier-sub fd-count" id="fdCount" aria-live="polite" style="min-height:0"></p>
+      </article>
+
+      <!-- 3. Gift -->
+      <article class="tier" id="giftTier">
+        <span class="tier-badge" style="background:#97C459">Free if you need it</span>
+        <p class="tier-name">A gift</p>
+        <p class="tier-price disp"><span>$0</span><small>if you can't pay</small></p>
+        <p class="tier-sub">Apply for one if you can't afford it, or give one to someone.</p>
+        <ul>
+          <li><i class="ti ti-check" aria-hidden="true"></i>A free month or year of the full app</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i>Matched in the order you applied</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i>Apply inside the app: gift icon, then RECEIVE</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i>Giving a gift to someone opens soon</li>
+        </ul>
+        <p class="gift-count" id="giftCount" aria-live="polite"></p>
+        <a href="../start/#gift" class="btn btn-ghost btn-block">Apply for a gift</a>
+        <p class="tier-sub" style="margin-top:10px;min-height:0">Want to give one? <b style="color:#fff">Gift The Forge to someone</b> is coming soon. Not open yet.</p>
+      </article>
+    </div>
+
+    <p class="gift-inline">Questions, or something stuck? Email <a href="mailto:theforgemaster1@proton.me">theforgemaster1@proton.me</a> and it gets fixed personally. <a href="../terms/#5-refunds">Refunds</a> &middot; <a href="https://billing.stripe.com/p/login/dRmeVcctxdpS3db8CZasg00" rel="noopener">Manage or cancel</a></p>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap"><div class="footer-bottom">
+      <span>&copy; <span id="year">2026</span> The Forge. All rights reserved.</span>
+      <span><a href="../privacy/">Privacy</a> &middot; <a href="../terms/">Terms</a> &middot; <a href="../">Home</a></span>
+    </div></div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" integrity="sha384-0w2KAL2YHP6wKOkUDzkCDGgVvfmHnj02DHeQ6XcHOgTfFsGyonKOpShMH1x6nk9o" crossorigin="anonymous"></script>
+  <script src="../assets/auth.js"></script>
+  <script src="membership.js"></script>
+  <script src="../assets/fx.js"></script>
+  <script src="../track.js" defer></script>
+</body>
+</html>

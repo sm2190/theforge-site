@@ -73,11 +73,15 @@
     </div>
   </div>
 
+  <script src="../assets/stores.js"></script>
   <script>
     (function () {
       // LIVE flags: flip to true when each store listing is public.
-      var ANDROID_LIVE = false;   // true once the Play store listing page is public (it 404ed right after open testing went live)
-      var IOS_LIVE = true;        // iOS target live? (TestFlight public beta now)
+      // The flags and store URLs now live in assets/stores.js, shared with /start/
+      // and /membership/. Flip them there.
+      var ST = window.FORGE_STORES || {};
+      var ANDROID_LIVE = !!ST.androidLive;
+      var IOS_LIVE = !!ST.iosLive;
 
       var params = new URLSearchParams(location.search);
       var ref = (params.get('ref') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 8);
@@ -90,7 +94,7 @@
       var iosBtn = document.getElementById('iosBtn');
 
       if (ANDROID_LIVE) {
-        var playUrl = androidBtn.getAttribute('data-store');
+        var playUrl = ST.androidStoreUrl || androidBtn.getAttribute('data-store');
         // Play Install Referrer keeps the invite code through install.
         if (ref) playUrl += '&referrer=' + encodeURIComponent('ref=' + ref);
         androidBtn.href = playUrl;
@@ -98,11 +102,11 @@
       } else {
         // Beta: the waitlist signup carries the invite code into ref_code.
         // Open testing: Google's join page works for any Google account.
-        androidBtn.href = 'https://play.google.com/apps/testing/com.theforge.app';
+        androidBtn.href = ST.androidBetaUrl || 'https://play.google.com/apps/testing/com.theforge.app';
         androidBtn.textContent = 'Android: join the beta on Google Play';
       }
-      if (IOS_LIVE && iosBtn.getAttribute('data-store')) {
-        iosBtn.href = iosBtn.getAttribute('data-store');
+      if (IOS_LIVE && (ST.iosUrl || iosBtn.getAttribute('data-store'))) {
+        iosBtn.href = ST.iosUrl || iosBtn.getAttribute('data-store');
       }
 
       // Auto-forward when we can tell the platform AND that store is live.

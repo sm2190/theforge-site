@@ -104,6 +104,8 @@
     input:focus { box-shadow:0 0 0 4px rgba(250,204,21,.14); }
     button { border-radius:10px; box-shadow:0 10px 34px rgba(245,158,11,.28); transition:transform .35s cubic-bezier(.87,0,.13,1), box-shadow .35s; }
     button:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 14px 44px rgba(245,158,11,.42); }
+    .launch-banner { display:block; background:var(--gold); color:#000; border-radius:12px; padding:14px 18px; margin:0 0 22px; font-size:14px; font-weight:600; text-decoration:none; box-shadow:0 10px 34px rgba(245,158,11,.3); }
+    .launch-banner b { font-weight:900; }
     @media (max-width:520px) { form { flex-direction:column; } }
   </style>
 </head>
@@ -117,6 +119,7 @@
       <img class="fallback" src="../assets/app-icon.png" alt="" />
     </div>
 
+    <a class="launch-banner fx-in" href="../start/" data-track="join_to_start">The Forge is open. <b>14 days free, no card.</b> Sign up with Google or Apple &rarr;</a>
     <p class="kicker fx-in">The Forge opens soon</p>
     <h1 class="split">The app that <span class="gold">hates</span> being used.</h1>
     <p class="lead fx-in fx-d1">

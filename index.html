@@ -28,11 +28,14 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css" integrity="sha384-3M9B/xDQKtE5Qy2ugrRtS1uY/Z4hePOYOEliLtOGcjnUaO6M715SQQxJvf1TdJcD" crossorigin="anonymous" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="fx.css" />
+  <link rel="stylesheet" href="signup.css" />
   <script>document.documentElement.classList.add('js');</script>
   <link rel="modulepreload" href="assets/three.module.min.js" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "The Forge", "url": "https://jointheforge.app/", "applicationCategory": "LifestyleApplication", "operatingSystem": "iOS, Android", "description": "A goal achievement app for Muslims: a written daily goal you read every morning, focus sessions that lock distracting apps, and friends you choose who see every missed commitment.", "downloadUrl": "https://jointheforge.app/get/", "offers": [{"@type": "Offer", "name": "The Iron Standard, monthly", "price": "10.00", "priceCurrency": "USD"}, {"@type": "Offer", "name": "The Iron Standard, yearly", "price": "102.00", "priceCurrency": "USD"}], "publisher": {"@type": "Organization", "name": "The Forge", "email": "theforgemaster1@proton.me"}}</script>
 </head>
 <body>
+
+  <a class="top-bar" href="start/" data-track="topbar_start" data-signup-cta><b>14 days free. No card.</b> Sign up free &rarr;</a>
 
   <!-- ── Nav ─────────────────────────────────────────────── -->
   <header class="nav">
@@ -47,7 +50,7 @@
         <a href="#pricing">Pricing</a>
       </nav>
       <div class="nav-cta">
-        <a href="#pricing" class="btn btn-gold" data-track="nav_start_day_one">Start Day One</a>
+        <a href="start/" class="btn btn-gold" data-track="nav_start_day_one" data-signup-cta>Start free</a>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu"><i class="ti ti-menu-2"></i></button>
       </div>
     </div>
@@ -64,8 +67,9 @@
           <p class="pill"><i aria-hidden="true"></i>DISCIPLINE, MADE REAL</p>
           <h1 class="disp split">A system to achieve <span class="gold">any</span> goal, inshallah.</h1>
           <p class="hero-sub fx-in">Built on research-backed methods: a written goal you read every morning, focus that locks your phone, and the friends you choose, who see every miss.</p>
+          <div class="free-slab fx-in" role="text"><span>14 days free.</span> <span>No card.</span></div>
           <div class="hero-btns fx-in">
-            <a href="#pricing" class="btn btn-gold" data-track="hero_start_anvil">Start your 90-Day Anvil</a>
+            <a href="start/" class="btn btn-gold" data-track="hero_start_anvil" data-signup-cta>Start your 90-Day Anvil</a>
             <a href="#system" class="btn btn-ghost" data-track="hero_see_how">See how it works</a>
           </div>
           <div class="stores fx-in">
@@ -253,28 +257,42 @@
               <li><i class="ti ti-check" aria-hidden="true"></i>Weekly cohort meetings + daily check-ins</li>
               <li><i class="ti ti-check" aria-hidden="true"></i>Notion bundle &amp; SYE masterclass</li>
             </ul>
-            <a href="#waitlist" class="btn btn-ghost btn-block">Join the waitlist to apply</a>
+            <a href="membership/#founding" class="btn btn-ghost btn-block" data-founding-cta>Apply for a Founding spot</a>
             <p class="tier-sub fd-count" id="fdCount" aria-live="polite"></p>
           </article>
         </div>
+        <p class="gift-inline">Can't afford it? <a href="start/#gift" data-track="pricing_gift_apply">Apply for a gift</a>. Want to give one? <a href="membership/#giftTier">Gift The Forge to someone</a>, coming soon. <a href="membership/">All membership options</a>.</p>
       </div>
     </section>
 
     <!-- ── Waitlist ──────────────────────────────────────── -->
     <section class="section" id="waitlist" style="border-top:1px solid var(--line)">
       <div class="wrap" style="max-width:640px;text-align:center">
-        <p class="kicker">THE FORGE OPENS SOON</p>
-        <h2 class="disp split">Get in <span class="gold">first</span>.</h2>
-        <p style="margin:14px 0 22px">Early access before the public launch. Invites go out in signup order, and waitlist members get first claim on the <b>Founding&nbsp;20</b>.</p>
-        <form id="wlForm" class="wl-form" novalidate>
-          <label for="wlEmail" class="sr-only">Your email address</label>
-          <input type="email" id="wlEmail" class="wl-input" placeholder="your@email.com" autocomplete="email" required aria-describedby="wlConsent" />
-          <button type="submit" class="btn btn-gold" id="wlBtn">Join the waitlist</button>
-        </form>
-        <p class="wl-consent" id="wlConsent">We use your email to tell you when The Forge opens, and now and
-        then to send you news from The Forge. We never sell or share it. Unsubscribe in one click, or ask
-        us to delete it at any time. See our <a href="privacy/">Privacy Policy</a>.</p>
-        <p class="wl-note" id="wlMsg" role="status" aria-live="polite"><span id="wlCount"></span></p>
+        <!-- Sign-up mode (default): one tap with Google or Apple -->
+        <div id="wlSignup">
+          <p class="kicker">THE FORGE IS OPEN</p>
+          <h2 class="disp split">Start your <span class="gold">14 days</span>.</h2>
+          <div class="free-slab lg" role="text" style="margin-top:14px"><span>14 days free.</span> <span>No card.</span></div>
+          <p style="margin:0 0 22px">Sign up with Google or Apple, download the app, and sign in with the same account. That is the whole setup.</p>
+          <a href="start/" class="btn btn-gold" style="font-size:15px;padding:15px 30px" data-track="signup_band_cta" data-signup-cta>Sign up free</a>
+          <p class="wl-note" role="status" aria-live="polite"><span data-wlcount></span></p>
+          <p class="gift-inline" style="margin-top:14px">Can't afford it? <a href="start/#gift" data-track="signup_band_gift">Apply for a gift</a>. Or <a href="membership/#giftTier">gift The Forge to someone</a>, coming soon.</p>
+        </div>
+        <!-- Waitlist mode (CTA_MODE = 'waitlist' in main.js) -->
+        <div id="wlLegacy" hidden>
+          <p class="kicker">THE FORGE OPENS SOON</p>
+          <h2 class="disp split">Get in <span class="gold">first</span>.</h2>
+          <p style="margin:14px 0 22px">Early access before the public launch. Invites go out in signup order, and waitlist members get first claim on the <b>Founding&nbsp;20</b>.</p>
+          <form id="wlForm" class="wl-form" novalidate>
+            <label for="wlEmail" class="sr-only">Your email address</label>
+            <input type="email" id="wlEmail" class="wl-input" placeholder="your@email.com" autocomplete="email" required aria-describedby="wlConsent" />
+            <button type="submit" class="btn btn-gold" id="wlBtn">Join the waitlist</button>
+          </form>
+          <p class="wl-consent" id="wlConsent">We use your email to tell you when The Forge opens, and now and
+          then to send you news from The Forge. We never sell or share it. Unsubscribe in one click, or ask
+          us to delete it at any time. See our <a href="privacy/">Privacy Policy</a>.</p>
+          <p class="wl-note" id="wlMsg" role="status" aria-live="polite"><span id="wlCount"></span></p>
+        </div>
       </div>
     </section>
 
@@ -285,7 +303,7 @@
         <p class="kicker">THE 90-DAY ANVIL</p>
         <h2 class="disp split">Become who you can't yet <span class="gold">imagine</span>.</h2>
         <p>One full Anvil cycle. The system is ready. The only variable is you.</p>
-        <a href="#waitlist" class="btn btn-gold" style="font-size:15px;padding:15px 30px" data-prelaunch-cta>Start day one</a>
+        <a href="start/" class="btn btn-gold" style="font-size:15px;padding:15px 30px" data-prelaunch-cta data-signup-cta>Start day one</a>
         <div class="date-chip"><i class="ti ti-calendar" aria-hidden="true"></i> <span id="resetDate">You'll be different in 90 days</span></div>
       </div>
     </section>
@@ -303,7 +321,7 @@
           <p>Discipline, made real. Built for the ones who show up. Est. Day One.</p>
         </div>
         <div class="fcol"><h4>Free tools</h4><a href="creed/">Write your Creed</a><a href="gap/">The Gap Test</a><a href="sabr/">The Sabr Fort</a></div>
-        <div class="fcol"><h4>Product</h4><a href="#system">The System</a><a href="#accountability">Accountability</a><a href="#pricing">Pricing</a></div>
+        <div class="fcol"><h4>Product</h4><a href="#system">The System</a><a href="#accountability">Accountability</a><a href="#pricing">Pricing</a><a href="start/">Sign up free</a><a href="membership/">Membership</a></div>
         <div class="fcol"><h4>Company</h4><a href="#system">Manifesto</a><a href="mailto:theforgemaster1@proton.me">Contact</a></div>
         <div class="fcol"><h4>Legal</h4><a href="privacy/">Privacy</a><a href="terms/">Terms</a><a href="terms/#5-refunds">Refunds</a><a href="delete-account/">Delete your account</a><a href="accessibility/">Accessibility</a><a href="https://billing.stripe.com/p/login/dRmeVcctxdpS3db8CZasg00" rel="noopener">Manage or cancel membership</a></div>
       </div>

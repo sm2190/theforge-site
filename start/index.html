@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data:; connect-src 'self' https://hlvcjroskewmoxsxwksg.supabase.co; base-uri 'none'; form-action 'self'; object-src 'none'" />
+  <script src="../assets/frame-guard.js"></script>
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0A0A0A" />
+  <title>Start The Forge: 14 days free, no card</title>
+  <meta name="description" content="Sign up with Google or Apple. 14 days free, no card. Then download The Forge and sign in with the same account.">
+  <link rel="canonical" href="https://jointheforge.app/start/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jointheforge.app/start/" />
+  <meta property="og:title" content="Start The Forge: 14 days free, no card" />
+  <meta property="og:description" content="Sign up with Google or Apple. 14 days free, no card." />
+  <meta property="og:image" content="https://jointheforge.app/assets/feature-graphic.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css" integrity="sha384-3M9B/xDQKtE5Qy2ugrRtS1uY/Z4hePOYOEliLtOGcjnUaO6M715SQQxJvf1TdJcD" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../fx-core.css" />
+  <link rel="stylesheet" href="../signup.css" />
+  <link rel="modulepreload" href="../assets/three.module.min.js" />
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <div class="fx-backdrop" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a href="../" class="brand" aria-label="The Forge home">
+        <img class="logo-img" src="../assets/app-icon.png" alt="" aria-hidden="true" />
+        <span class="brand-name disp">The Forge</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="../#system">The System</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="../membership/">Membership</a>
+      </nav>
+      <div class="nav-cta"><button class="nav-toggle" id="navToggle" aria-label="Open menu"><i class="ti ti-menu-2"></i></button></div>
+    </div>
+  </header>
+
+  <main class="page-wrap">
+    <div class="forge3d" aria-hidden="true" style="max-width:220px;margin:-10px auto -16px">
+      <canvas></canvas>
+      <img class="fallback" src="../assets/app-icon.png" alt="" />
+    </div>
+
+    <!-- Signed out -->
+    <section id="stOut">
+      <p class="kicker fx-in">THE FORGE IS OPEN</p>
+      <h1 class="disp split">Start your <span class="gold">14 days</span>.</h1>
+      <div class="free-slab lg fx-in" role="text"><span>14 days free.</span> <span>No card.</span></div>
+      <p class="page-lead fx-in fx-d1">Sign up with Google or Apple. Then download the app and sign in with the same account. That is the whole setup.</p>
+      <div class="auth-btns fx-in fx-d2" id="authBtns">
+        <button type="button" class="auth-btn google" data-provider="google"><i class="ti ti-brand-google" aria-hidden="true"></i>Continue with Google</button>
+        <button type="button" class="auth-btn apple" data-provider="apple"><i class="ti ti-brand-apple" aria-hidden="true"></i>Continue with Apple</button>
+      </div>
+      <p class="wl-note" id="stMsg" role="status" aria-live="polite"><span data-wlcount></span></p>
+      <p class="gift-inline" style="margin:6px auto 18px">Can't afford it? <a href="#gift" data-track="start_gift_apply">Apply for a gift</a></p>
+      <p class="auth-fine">We use your email to set up your account and, now and then, to send you news from The Forge. We never sell or share it. Unsubscribe in one click, or ask us to delete it any time. See our <a href="../privacy/">Privacy Policy</a>.</p>
+    </section>
+
+    <!-- Signed in -->
+    <section id="stIn" hidden>
+      <p class="kicker">YOU ARE IN</p>
+      <h1 class="disp">Your <span class="gold">14 days</span> start now.</h1>
+      <div class="free-slab" role="text"><span>14 days free.</span> <span>No card.</span></div>
+      <p class="page-lead">The clock runs from your first sign-in in the app, so no day is wasted while you download.</p>
+      <div class="stores stores-lg">
+        <a class="store" id="iosBtn" href="../get/"><i class="ti ti-brand-apple" aria-hidden="true"></i><span><small>Download on the</small><b>App Store</b></span></a>
+        <a class="store" id="androidBtn" href="../get/"><i class="ti ti-brand-google-play" aria-hidden="true"></i><span><small>Get it on</small><b>Google Play</b></span></a>
+      </div>
+      <ol class="steps">
+        <li><span><b>Download The Forge</b> from the store above.</span></li>
+        <li><span>Open it and <b>sign in with the same Google or Apple account</b><span id="whoLine"></span>. Same account, same 14 days.</span></li>
+        <li><span>Declare your first day. Day one starts there.</span></li>
+      </ol>
+      <p style="margin-top:22px;font-size:13.5px;color:var(--muted)">Ready to keep going after the trial? <a href="../membership/" style="color:var(--gold);text-decoration:underline">See membership options</a>. <button type="button" class="link-quiet" id="signOut">Not you? Sign out</button></p>
+    </section>
+
+    <!-- Gift: apply, plus the give-a-gift teaser (no payment yet) -->
+    <section class="gift-grid" id="gift" aria-label="Gifts">
+      <article class="gift-card apply">
+        <i class="ti ti-gift" aria-hidden="true"></i>
+        <h3>Can't afford it? Apply for a gift.</h3>
+        <p class="gift-count" id="giftCount" aria-live="polite"></p>
+        <p>The Forge should not be out of reach. Apply for a free month or year and you are matched in the order you applied, as gifts come in.</p>
+        <p style="margin-bottom:0"><b style="color:#fff">How:</b> sign up here, open the app, tap the gift icon at the top right of Home, choose RECEIVE and apply.</p>
+      </article>
+      <article class="gift-card teaser">
+        <span class="soon-tag">Soon</span>
+        <i class="ti ti-heart-handshake" aria-hidden="true"></i>
+        <h3>Gift The Forge to someone</h3>
+        <p>Soon you will be able to give a month or a year to a friend or a family member, or to someone waiting in the gift queue. Not open yet.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap"><div class="footer-bottom">
+      <span>&copy; <span id="year">2026</span> The Forge. All rights reserved.</span>
+      <span><a href="../privacy/">Privacy</a> &middot; <a href="../terms/">Terms</a> &middot; <a href="../">Home</a></span>
+    </div></div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" integrity="sha384-0w2KAL2YHP6wKOkUDzkCDGgVvfmHnj02DHeQ6XcHOgTfFsGyonKOpShMH1x6nk9o" crossorigin="anonymous"></script>
+  <script src="../assets/stores.js"></script>
+  <script src="../assets/auth.js"></script>
+  <script src="start.js"></script>
+  <script src="../assets/fx.js"></script>
+  <script type="module" src="../assets/hero3d.js"></script>
+  <script src="../track.js" defer></script>
+</body>
+</html>

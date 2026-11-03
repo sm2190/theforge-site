@@ -98,12 +98,33 @@
 
 /* ── Waitlist + prelaunch CTA wiring ─────────────────────────────── */
 (function () {
-  var PRELAUNCH = true; // flip to false on launch day: buy buttons come back
+  // One constant decides what every call to action does (was PRELAUNCH):
+  //   'signup'   : Google/Apple sign-up page /start/ (14 days free, no card)
+  //   'waitlist' : the pre-launch email waitlist (the old PRELAUNCH = true)
+  //   'buy'      : straight to Stripe with an email prefill (the old PRELAUNCH = false)
+  var CTA_MODE = 'signup';
   var SB_URL = 'https://hlvcjroskewmoxsxwksg.supabase.co';
   var SB_KEY = 'sb_publishable_yirT83I5CFpR3RHWdbwweA_6UlklZPT';
+  var PRELAUNCH = CTA_MODE === 'waitlist';
 
-  // Pre-launch: all purchase CTAs funnel into the waitlist instead.
-  if (PRELAUNCH) {
+  if (CTA_MODE === 'signup') {
+    // The HTML already points at /start/ and /membership/ (works without JS);
+    // here the Iron plan card joins them and the cycle toggle leaves it alone.
+    document.querySelectorAll('[data-pay]').forEach(function (a) {
+      a.setAttribute('href', 'start/');
+      a.setAttribute('data-prelaunch', '');
+      a.textContent = 'Start 14 days free';
+      var note = a.nextElementSibling;
+      if (note && note.tagName === 'P') note.style.display = 'none';
+    });
+  } else if (PRELAUNCH) {
+    // Waitlist mode: swap the sign-up band for the email form and point every
+    // call to action back at it.
+    var su = document.getElementById('wlSignup'), lg = document.getElementById('wlLegacy');
+    if (su) su.hidden = true;
+    if (lg) lg.hidden = false;
+    document.querySelectorAll('[data-signup-cta]').forEach(function (a) { a.setAttribute('href', '#waitlist'); });
+    document.querySelectorAll('[data-founding-cta]').forEach(function (a) { a.setAttribute('href', '#waitlist'); a.textContent = 'Join the waitlist to apply'; });
     document.querySelectorAll('[data-pay]').forEach(function (a) {
       a.setAttribute('href', '#waitlist');
       a.setAttribute('data-prelaunch', '');
@@ -159,14 +180,16 @@
   }
 
   // Live count for social proof (only shown once it's non-trivial).
-  var countEl = document.getElementById('wlCount');
+  var countEls = document.querySelectorAll('#wlCount,[data-wlcount]');
   fetch(SB_URL + '/rest/v1/rpc/waitlist_count', {
     method: 'POST',
     headers: { apikey: SB_KEY, 'Content-Type': 'application/json' },
     body: '{}'
   }).then(function (r) { return r.json(); }).then(function (n) {
-    if (countEl && typeof n === 'number' && n >= 25) {
-      countEl.textContent = n + ' people are already waiting.';
+    if (typeof n === 'number' && n >= 25) {
+      countEls.forEach(function (el) {
+        el.textContent = n + (el.hasAttribute('data-wlcount') ? ' people have already signed up.' : ' people are already waiting.');
+      });
     }
   }).catch(function () {});
 
