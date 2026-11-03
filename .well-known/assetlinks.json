@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.theforge.app",
+      "sha256_cert_fingerprints": [
+        "EB:EF:23:19:90:2C:C2:11:7B:1E:28:34:C4:EE:49:60:C5:D0:98:0F:92:C8:D2:24:F3:47:43:34:C2:7C:94:BF",
+        "D0:AD:1E:59:9E:8D:FF:83:D2:2D:E2:12:A5:DE:96:B4:BA:4E:2F:31:FA:BF:94:D6:69:B0:AC:C6:C5:0C:1E:12"
+      ]
+    }
+  }
+]
