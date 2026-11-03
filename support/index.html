@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data:; connect-src 'self' https://hlvcjroskewmoxsxwksg.supabase.co; base-uri 'none'; form-action 'self'; object-src 'none'" />
+  <script src="../assets/frame-guard.js"></script>
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support and Billing | The Forge</title>
+  <meta name="description" content="Manage or cancel your membership, find your verification code, apply for a gift, or contact The Forge." />
+  <link rel="canonical" href="https://jointheforge.app/support/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jointheforge.app/support/" />
+  <meta property="og:title" content="Support and Billing | The Forge" />
+  <meta property="og:description" content="Manage or cancel your membership, find your verification code, apply for a gift, or contact The Forge." />
+  <meta property="og:image" content="https://jointheforge.app/assets/feature-graphic.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#0A0A0A" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../fx-core.css" />
+  <script>document.documentElement.classList.add('js');</script>
+  <style>
+    .doc { max-width: 760px; margin: 0 auto; padding: 72px 22px 96px; }
+    .doc h1 { font-family: 'Anton', sans-serif; font-size: clamp(34px, 7vw, 52px);
+              text-transform: uppercase; letter-spacing: -0.5px; line-height: 1.04; }
+    .doc .updated { color: var(--faint); font-size: 13px; margin-top: 10px;
+                    text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+    .doc h2 { font-size: 19px; font-weight: 800; margin: 40px 0 12px;
+              color: var(--gold); letter-spacing: -0.2px; }
+    .doc p, .doc li { color: #D1D5DB; font-size: 15px; line-height: 1.75; }
+    .doc p { margin-bottom: 14px; }
+    .doc ul { margin: 0 0 16px 20px; }
+    .doc li { margin-bottom: 8px; }
+    .doc a { color: var(--gold); }
+    .doc strong { color: #fff; }
+    .lede { border-left: 3px solid var(--gold); padding: 14px 18px;
+            background: var(--panel); margin: 26px 0; }
+    .lede p { margin: 0; }
+    .back { display: inline-block; margin-bottom: 28px; color: var(--muted);
+            font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
+            text-transform: uppercase; text-decoration: none; }
+    .back:hover { color: var(--gold); }
+    table { width: 100%; border-collapse: collapse; margin: 8px 0 20px; }
+    th, td { text-align: left; padding: 10px 12px; border: 1px solid var(--line);
+             font-size: 14px; color: #D1D5DB; vertical-align: top; }
+    th { background: var(--panel); color: #fff; font-weight: 800; }
+    /* Numbered steps get real visual weight: this is the part of the page
+       people actually came for, and the stores check that it is prominent. */
+    ol.steps { counter-reset: s; list-style: none; margin: 0 0 20px; padding: 0; }
+    ol.steps li { counter-increment: s; position: relative; padding: 0 0 0 46px;
+                  margin-bottom: 18px; color: #E5E7EB; font-size: 16px; }
+    ol.steps li::before { content: counter(s); position: absolute; left: 0; top: -2px;
+                  width: 30px; height: 30px; background: var(--gold); color: #000;
+                  font-weight: 900; font-size: 15px; display: flex;
+                  align-items: center; justify-content: center; }
+    .warn { border: 2px solid #DC2626; padding: 14px 18px; margin: 26px 0; }
+    .warn p { margin: 0; color: #FCA5A5; }
+    .warn strong { color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="fx-backdrop" aria-hidden="true"></div>
+  <main class="doc fx-doc">
+    <a class="back" href="../">&larr; The Forge</a>
+    <h1 class="split">Support and Billing</h1>
+    <p class="updated">Last updated 3 November 2026</p>
+
+    <div class="lede">
+      <p>Everything about your membership, payments and account in one place. If
+      something here does not answer it, email us and a real person replies.</p>
+    </div>
+
+    <h2>Manage or cancel your membership</h2>
+    <ol class="steps">
+      <li>Open the <a href="https://billing.stripe.com/p/login/dRmeVcctxdpS3db8CZasg00" rel="noopener">billing portal</a>.</li>
+      <li>Enter the <strong>email you paid with</strong>. Stripe sends you a sign-in link.</li>
+      <li>Update your card, download invoices, or cancel. A cancellation takes effect at the end of the period you already paid for.</li>
+    </ol>
+
+    <h2>Didn't get your verification code?</h2>
+    <p>The 6-digit code goes to the <strong>email you used at checkout</strong>, and to the
+    email you signed up to The Forge with if they are different. Check Spam and
+    Promotions. Codes expire after a short time, so request a new one in the app if
+    it is old. Still nothing after 10 minutes? Email us from either address.</p>
+
+    <h2>Plans</h2>
+    <table>
+      <tr><th>Plan</th><th>Price</th></tr>
+      <tr><td>Free trial</td><td>14 days, no card</td></tr>
+      <tr><td>Iron</td><td>$10 a month, or $102 a year</td></tr>
+      <tr><td>Founding 20</td><td>$20, by application</td></tr>
+      <tr><td>Gift</td><td>Can't pay right now? Apply for a gifted membership, or gift one to someone else</td></tr>
+    </table>
+    <p>See all plans and the gift queue on the <a href="../membership/">membership page</a>.</p>
+
+    <h2>Your account</h2>
+    <p>To delete your account and its data, follow the steps on
+    <a href="../delete-account/">Delete your account</a>. See also the
+    <a href="../privacy/">Privacy Policy</a> and <a href="../terms/">Terms of Service</a>.</p>
+
+    <h2>Contact</h2>
+    <p>Email <a href="mailto:theforgemaster1@proton.me">theforgemaster1@proton.me</a> from the
+    address on your account. Put <strong>Billing</strong> or <strong>Help</strong> in the
+    subject. We reply within 48 hours, usually sooner.</p>
+  </main>
+  <script src="../assets/fx.js"></script>
+</body>
+</html>
