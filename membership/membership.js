@@ -37,17 +37,23 @@
   // Payment: the Stripe link carries the account, so the membership unlocks.
   // Signed in: client_reference_id = Forge user id (the webhook's first choice)
   // plus the email. Signed out: ask for the email first, as the home page does.
+  // Trial emails link here with ?u=<user id>&e=<email>, so a click from the
+  // inbox pays onto the right account without signing in on the web first.
+  var qp = new URLSearchParams(location.search);
+  var mailUid = /^[0-9a-f-]{36}$/i.test(qp.get('u') || '') ? qp.get('u') : null;
+  var mailEmail = EMAIL_RE.test(qp.get('e') || '') ? qp.get('e') : null;
   function payUrl(email) {
     var base = PLANS[cycle].iron[3];
     if (!/^https:\/\/buy\.stripe\.com\//.test(base)) return null;
     var q = [];
-    if (user && user.id) q.push('client_reference_id=' + encodeURIComponent(user.id));
+    var uid = (user && user.id) || mailUid;
+    if (uid) q.push('client_reference_id=' + encodeURIComponent(uid));
     if (email) q.push('prefilled_email=' + encodeURIComponent(email));
     return q.length ? base + '?' + q.join('&') : base;
   }
   var pay = $('ironPay'), payForm = $('payEmail');
   pay.addEventListener('click', function (e) {
-    var email = user && user.email;
+    var email = (user && user.email) || mailEmail;
     if (email) { e.preventDefault(); location.href = payUrl(email); return; }
     e.preventDefault();
     pay.style.display = 'none';
