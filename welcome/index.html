@@ -45,6 +45,20 @@
       <li><span>Anything stuck? Email <a href="mailto:theforgemaster1@proton.me" style="color:var(--gold)">theforgemaster1@proton.me</a> and it gets fixed personally.</span></li>
     </ol>
   </main>
+  <script>
+    // A gift payment lands here with ?gift=1: thank the giver instead.
+    (function () {
+      if (new URLSearchParams(location.search).get('gift') !== '1') return;
+      var m = document.querySelector('main.card');
+      m.querySelector('.kicker').textContent = 'GIFT RECEIVED';
+      m.querySelector('h1').innerHTML = 'Your gift is <span class="gold">on its way</span>.';
+      m.querySelector('.lead').textContent = 'It goes to the person who has waited longest in the gift queue. They never see your name. A receipt and a thank-you are in your inbox.';
+      var b = m.querySelectorAll('a.btn');
+      b[0].textContent = 'BACK TO THE FORGE'; b[0].href = '../';
+      b[1].style.display = 'none';
+      m.querySelector('ol').style.display = 'none';
+    })();
+  </script>
   <script src="../assets/fx.js"></script>
 </body>
 </html>

@@ -49,6 +49,12 @@
     <h1 class="disp">Keep going. <span class="gold">Choose how.</span></h1>
     <p class="page-lead">Your 14 free days are for finding out whether The Forge holds. No card was ever taken, so nothing renews until you choose. Three ways to continue.</p>
 
+    <ol class="steps" aria-label="How it works">
+      <li><span><b>Pick one option below.</b> The Iron Standard, the Founding 20, or a gift.</span></li>
+      <li><span><b>Pay or apply on this page.</b> Use the same email you sign in to The Forge with.</span></li>
+      <li><span><b>Open The Forge app again</b> and tap <b>REFRESH STATUS</b>. It unlocks.</span></li>
+      <li><span><b>Still locked?</b> On that screen find <b>ALREADY A MEMBER?</b>, type the email you paid with, and enter the 6-digit code we email you.</span></li>
+    </ol>
     <!-- Sign-in strip: only shown while signed out; pre-fills payment and unlocks the Founding application -->
     <div class="ms-signin" id="msSignin">
       <p>Sign in first so your payment lands on the right account, and to apply for the Founding 20.</p>
@@ -116,16 +122,18 @@
         <span class="tier-badge" style="background:#97C459">Free if you need it</span>
         <p class="tier-name">A gift</p>
         <p class="tier-price disp"><span>$0</span><small>if you can't pay</small></p>
-        <p class="tier-sub">Apply for one if you can't afford it, or give one to someone.</p>
+        <p class="tier-sub">Apply for one if you can't afford it, or give one to someone in need.</p>
         <ul>
           <li><i class="ti ti-check" aria-hidden="true"></i>A free month or year of the full app</li>
           <li><i class="ti ti-check" aria-hidden="true"></i>Matched in the order you applied</li>
           <li><i class="ti ti-check" aria-hidden="true"></i>Apply inside the app: gift icon, then RECEIVE</li>
-          <li><i class="ti ti-check" aria-hidden="true"></i>Giving a gift to someone opens soon</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i>Give one: it goes to whoever has waited longest</li>
         </ul>
         <p class="gift-count" id="giftCount" aria-live="polite"></p>
         <a href="../start/#gift" class="btn btn-ghost btn-block">Apply for a gift</a>
-        <p class="tier-sub" style="margin-top:10px;min-height:0">Want to give one? <b style="color:#fff">Gift The Forge to someone</b> is coming soon. Not open yet.</p>
+        <p class="tier-sub" style="margin-top:16px;min-height:0"><b style="color:#fff">Gift The Forge to someone in need.</b> You pay once. It is not a subscription, and they never see your name.</p>
+        <a href="https://buy.stripe.com/14A6oG3X1gC4eVT5qNasg05" class="btn btn-gold btn-block" style="margin-top:10px" data-track="gift_give_month">Gift one month &middot; $10</a>
+        <a href="https://buy.stripe.com/00w28q1OT71u2977yVasg06" class="btn btn-ghost btn-block" style="margin-top:10px" data-track="gift_give_year">Gift one year &middot; $102</a>
       </article>
     </div>
 
