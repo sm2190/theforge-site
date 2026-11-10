@@ -10,6 +10,14 @@
   // Supabase (Services ID + secret key). Until then the Apple button explains
   // and points to the app instead of sending the visitor to an error page.
   var APPLE_WEB_READY = false;
+  // Google Identity Services: Google shows "to continue to jointheforge.app"
+  // and hands this page an ID token, which Supabase verifies. The older
+  // redirect flow sent people through the project's supabase.co address, and
+  // Google printed that address on its account chooser. Same Google client the
+  // apps use (public value). The redirect flow stays as the fallback.
+  var GOOGLE_CLIENT_ID = '1085644366055-evmo3movkdl23hrkcimjjlt5mhjs321e.apps.googleusercontent.com';
+  // false = only with ?gis=1 in the address (testing); true = for everyone.
+  var GIS_FOR_EVERYONE = false;
   var sb = null;
 
   function ss(k, v) {
@@ -94,8 +102,59 @@
     el.className = 'wl-note ' + (kind || '');
     el.textContent = text;
   }
+  function hex(buf) {
+    return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join('');
+  }
+  // Swap our Google button for Google's own button. Nothing changes if the
+  // script cannot load: the visitor keeps the redirect button.
+  function mountGoogle(root, msgEl) {
+    if (!(GIS_FOR_EVERYONE || /[?&]gis=1(&|$)/.test(location.search))) return;
+    var custom = root.querySelector('[data-provider="google"]');
+    if (!custom || !window.crypto || !crypto.subtle || !client()) return;
+    var rawBytes = new Uint8Array(16);
+    crypto.getRandomValues(rawBytes);
+    var raw = hex(rawBytes.buffer);
+    // Google gets the hashed nonce, Supabase the raw one: a stolen token cannot be replayed.
+    crypto.subtle.digest('SHA-256', new TextEncoder().encode(raw)).then(function (buf) {
+      var hashed = hex(buf);
+      var tag = document.createElement('script');
+      tag.src = 'https://accounts.google.com/gsi/client';
+      tag.async = true;
+      tag.onload = function () {
+        try {
+          var g = window.google.accounts.id;
+          g.initialize({
+            client_id: GOOGLE_CLIENT_ID,
+            nonce: hashed,
+            ux_mode: 'popup',
+            callback: function (resp) {
+              if (!resp || !resp.credential) return;
+              if (window.forgeTrack) window.forgeTrack('signup_click', 'google');
+              attribution();
+              client().auth.signInWithIdToken({ provider: 'google', token: resp.credential, nonce: raw }).then(function (r) {
+                if (r.error) flash(msgEl, 'Could not finish sign-in. Try again in a minute.', 'err');
+                else location.reload();
+              });
+            }
+          });
+          var holder = document.createElement('div');
+          holder.className = 'gis-btn';
+          holder.style.cssText = 'display:flex;justify-content:center;min-height:44px';
+          custom.parentNode.insertBefore(holder, custom);
+          g.renderButton(holder, {
+            type: 'standard', theme: 'filled_black', size: 'large', text: 'continue_with',
+            shape: 'rectangular', logo_alignment: 'center',
+            width: Math.max(200, Math.min(400, root.clientWidth || 320))
+          });
+          custom.style.display = 'none';
+        } catch (e) { /* keep the redirect button */ }
+      };
+      document.head.appendChild(tag);
+    }).catch(function () {});
+  }
   // Wire every [data-provider] button inside root; msgEl shows errors.
   function wireButtons(root, msgEl) {
+    mountGoogle(root, msgEl);
     root.querySelectorAll('[data-provider]').forEach(function (b) {
       b.addEventListener('click', function () {
         var p = b.getAttribute('data-provider');
