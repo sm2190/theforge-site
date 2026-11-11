@@ -17,7 +17,7 @@
   // apps use (public value). The redirect flow stays as the fallback.
   var GOOGLE_CLIENT_ID = '1085644366055-evmo3movkdl23hrkcimjjlt5mhjs321e.apps.googleusercontent.com';
   // false = only with ?gis=1 in the address (testing); true = for everyone.
-  var GIS_FOR_EVERYONE = false;
+  var GIS_FOR_EVERYONE = true;
   var sb = null;
 
   function ss(k, v) {
