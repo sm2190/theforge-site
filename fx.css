@@ -98,6 +98,9 @@
 .band { position: absolute; left: -5%; width: 110%; padding: 15px 0; white-space: nowrap; overflow: hidden; }
 .band-a { top: 26px; background: var(--gold); transform: rotate(-2.2deg); z-index: 2; box-shadow: 0 14px 40px rgba(245,158,11,.25); }
 .band .marquee-track span { font-family: 'Anton', sans-serif; text-transform: uppercase; font-size: 22px; letter-spacing: 3px; }
+.band-b { top: 58px; background: #050505; border-top: 1px solid var(--line-2); border-bottom: 1px solid var(--line-2); transform: rotate(2deg); z-index: 1; }
+.band-b .marquee-track span { color: rgba(255,255,255,.55); }
+.band-b .marquee-track b { color: var(--gold); margin: 0 22px; }
 .band-a .marquee-track span { color: #0A0A0A; }
 .band-a .marquee-track b { color: #0A0A0A; margin: 0 22px; }
 .marquee-track:hover { animation-play-state: paused; }
