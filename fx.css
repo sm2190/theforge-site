@@ -260,3 +260,4 @@ h1, h2, h3 { text-wrap: balance; }
   .shame-reason { clip-path: none; }
   .card, .tier, .shame, .showcase .device { transform: none; }
 }
+article.card[style*="--c"]{--c:var(--gold)!important}

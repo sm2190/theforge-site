@@ -28,7 +28,7 @@
     var d = new Date();
     d.setDate(d.getDate() + 90);
     var fmt = d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
-    dateEl.textContent = "You'll be different by " + fmt;
+    dateEl.textContent = 'Your day 90 is ' + fmt;
   }
 
   // ── Embers on the closing CTA ──────────────────────────────────
