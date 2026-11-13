@@ -33,7 +33,6 @@
     if (!user) return;
     out.hidden = true; inn.hidden = false;
     storeLinks();
-    if (user.email) $('whoLine').textContent = ' (' + user.email + ')';
     A.recordWaitlist(user);
     if (window.forgeTrack) window.forgeTrack('signup_done', (user.app_metadata && user.app_metadata.provider) || 'oauth');
     A.giftQueue().then(function (n) {
