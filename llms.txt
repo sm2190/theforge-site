@@ -9,10 +9,10 @@ Muslims who set goals and then drift: people who want to build discipline, cut p
 
 ## What it does
 - The Creed: a one-page written goal (why, year, month, week, up to 3 tasks today) that you read every morning. Reading it is part of your streak.
-- Deep Focus: pick a task and start a block. The apps you chose are locked until the work is done, and opening one snaps you back to the timer.
+- Deep Focus: pick a task and start a block. The apps you chose are locked until the work is done: on iPhone they will not open, on Android opening one brings you back to the timer.
 - Dark Hours: a window you set once. At night the whole app locks: no tasks, no scroll, one honest reflection.
 - The Monolith and streak: each kept day forges a block; a missed day resets the streak to zero.
-- Triads: friends you choose who see your streak, your wins and your misses.
+- Triads: three people, you and two friends you choose, who see your streak, your wins and your misses.
 - The Wall of Shame (the Arena): break a public commitment and it is shown on the Wall for 24 hours with your handle, what you broke and your confession. Keep your word and nothing is shown.
 - Weekly leaderboard, badges, a 90-Day Anvil cycle, history of kept and missed commitments, and the Mercy Protocol grace day.
 

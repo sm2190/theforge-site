@@ -36,11 +36,8 @@ It's a static folder, drop it on any host:
 
 ## Before launch, quick checklist
 
-- [ ] **Replace the screenshots.** `assets/screens/*.png` are currently the promo
-      *slides* used as placeholders. Drop the clean in-app screenshots in there with
-      the SAME filenames, no code changes needed:
-      `home.png`, `focus.png`, `dark-hours.png`, `monolith.png`, `leaderboard.png`
-      (also available: `creed.png`, `arena.png`, `triad.png`).
+- [x] Screenshots are the V2 app (2026-11-25): `assets/screens/*.webp`, 936 x 2026, shot from
+      the V2 prototype. The `.png` files there are the old V1 screens and are not used.
 - [ ] Swap the App Store / Google Play `href="#"` links (hero + Free tier) for real store URLs.
 - [ ] Pricing is wired to the app's real tiers. The Iron Standard CTA links to the
       Stripe hosted checkout (monthly/yearly). NOTE: these are **sandbox/test** Stripe
