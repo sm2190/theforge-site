@@ -113,7 +113,6 @@
 .fan { position: relative; height: 640px; margin-top: 10px; --k: 1; }
 .fan-stage { position: relative; height: 640px; display: flex; justify-content: center; transform-origin: 50% 0; }
 .fan .device { position: absolute; top: 10px; width: 272px; max-width: none; transition: none; }
-.fan .device:hover { transform: none; }
 .fan .f-c { z-index: 3; transform: translateY(calc((1 - var(--k)) * 70px)) scale(calc(.94 + var(--k) * .06)); }
 .fan .f-l { z-index: 2; --glow: rgba(0,0,0,.7); transform-origin: 50% 100%; transform: translateX(calc(-30px - var(--k) * var(--spread, 150px))) translateY(36px) rotate(calc(-2deg - var(--k) * 6deg)) scale(.86); filter: brightness(.8); }
 .fan .f-r { z-index: 2; --glow: rgba(0,0,0,.7); transform-origin: 50% 100%; transform: translateX(calc(30px + var(--k) * var(--spread, 150px))) translateY(36px) rotate(calc(2deg + var(--k) * 6deg)) scale(.86); filter: brightness(.8); }
@@ -169,6 +168,21 @@
 }
 .showcase.rev .device { transform: rotateY(calc((1 - var(--k)) * 26deg + var(--ry, 0deg))) rotateX(calc((1 - var(--k)) * 10deg + var(--rx, 0deg))) translateY(calc((1 - var(--k)) * 40px)); }
 .showcase .device:hover { transform: rotateY(var(--ry, 0deg)) rotateX(var(--rx, 0deg)); }
+/* Sections flow into each other: no hard rule between them, and the phone
+   glows are not cut off at a section edge (clip sideways only). The Wall's
+   red wash fades in and out instead of starting at a line. */
+.showcase, .arena { border-top: 0; overflow: visible; overflow-x: clip; }
+.arena { background: none; }
+.arena::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 50% at 50% 30%, rgba(226,75,74,.15), rgba(226,75,74,0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 220px, #000 calc(100% - 220px), transparent);
+          mask-image: linear-gradient(to bottom, transparent, #000 220px, #000 calc(100% - 220px), transparent); }
+.arena > .wrap { position: relative; z-index: 1; }
+@media (max-width: 960px) {
+  .showcase-inner { padding-block: 72px 104px; }
+  .showcase + .showcase .showcase-inner { padding-top: 40px; }
+  .arena { padding-top: 112px; }
+}
 .chip {
   position: absolute; z-index: 3; display: flex; align-items: center; gap: 9px; white-space: nowrap;
   padding: 10px 14px; border-radius: 12px; border: 1px solid var(--line-2);
